@@ -77,9 +77,13 @@ public class MouseControl : MonoBehaviour
             Vector2 coordsInMoveZone = WalkZoneDemonstrator.GetComponent<DrawZone>().
                                         CalcCoordsFromXYZ(WalkZoneDemonstrator.transform.InverseTransformPoint(cellUnderMouse.transform.position));
             if (CanMoveThere(coordsInMoveZone))
+            {
+                //ship.Move(cellUnderMouse.transform.position);
                 Debug.Log("Move!");
+            }
             else
                 Debug.Log("No Move!");
+
             return true;
         }
 

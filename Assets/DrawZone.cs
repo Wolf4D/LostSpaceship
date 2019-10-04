@@ -40,7 +40,7 @@ public class DrawZone : MonoBehaviour
 
    public bool IsInZone(int x, int y)
     {
-        Debug.Log(x + " " + y + "   " + radius);
+        //Debug.Log(x + " " + y + "   " + radius);
         if ((x >= radius*2+1) || (y >= radius * 2+1)) return false;
         switch (radius)
         {

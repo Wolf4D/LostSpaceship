@@ -854,9 +854,11 @@ MonoBehaviour:
     type: 3}
   cellUnderMouse: {fileID: 0}
   SelectedObject: {fileID: 0}
-  WalkZoneDemonstrator: {fileID: 2458529477638085825, guid: bf3a1e4b8053c324ab42992093a187db,
+  WalkZoneDemonstrator: {fileID: 0}
+  WalkZoneDemonstratorPrefab: {fileID: 2458529477638085825, guid: bf3a1e4b8053c324ab42992093a187db,
     type: 3}
   infoPanel: {fileID: 1787497307}
+  currentMouseMode: 0
 --- !u!1 &567608562
 GameObject:
   m_ObjectHideFlags: 0
@@ -6776,9 +6778,10 @@ MonoBehaviour:
   attackCooldown: 0
   attackCooldownLeft: 0
   range: 0
-  hasMoved: 1
+  hasMoved: 0
   unitName: Harvester
   abilityCooldownLeft: 0
+  command: 0
 --- !u!1 &1757946071
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,16 @@ public class ShipProperties : MonoBehaviour
 
     public int abilityCooldownLeft = 0;
 
+    private Vector3 target;
+
+    public enum Commands
+    {
+        Stand = 0,
+        Move = 1
+    };
+
+    public Commands command = Commands.Stand;
+
     // Start is called before the first frame update
     void Start()
     {                 
@@ -36,6 +46,21 @@ public class ShipProperties : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (command)
+        {
+            case (Commands.Stand): break;
+            case (Commands.Move):
+                {
+                    Vector3 direction = target - transform.position;
+                    Quaternion toRotation = Quaternion.FromToRotation(transform.forward, direction);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
+                } break;
+        }
+    }
+
+    public void Move(Vector3 ctarget)
+    {
+        target = ctarget;
+        command = Commands.Move;
     }
 }
