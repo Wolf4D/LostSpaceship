@@ -52,15 +52,27 @@ public class ShipProperties : MonoBehaviour
             case (Commands.Move):
                 {
                     Vector3 direction = target - transform.position;
-                    Quaternion toRotation = Quaternion.FromToRotation(transform.forward, direction);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
-                } break;
+                    float brake = direction.magnitude / 10.0f;
+                    if (brake > 1.0f) brake = 1.0f;
+
+                    Quaternion toRotation = Quaternion.LookRotation(direction);
+                    transform.rotation =  Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime / brake);
+                
+                    transform.Translate(Vector3.forward * brake * 8.0f * speed * Time.deltaTime);
+
+                    if (direction.magnitude < 2.35f)
+                    {
+                        command = Commands.Stand;
+                        return;
+                    }
+                }
+                break;
         }
     }
 
     public void Move(Vector3 ctarget)
     {
-        target = ctarget;
+        target = new Vector3(ctarget.x, this.transform.position.y, ctarget.z);
         command = Commands.Move;
     }
 }

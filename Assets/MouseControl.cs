@@ -78,11 +78,14 @@ public class MouseControl : MonoBehaviour
                                         CalcCoordsFromXYZ(WalkZoneDemonstrator.transform.InverseTransformPoint(cellUnderMouse.transform.position));
             if (CanMoveThere(coordsInMoveZone))
             {
-                //ship.Move(cellUnderMouse.transform.position);
+                ship.Move(cellUnderMouse.transform.position);
                 Debug.Log("Move!");
             }
             else
+            { 
                 Debug.Log("No Move!");
+                return false;
+            }
 
             return true;
         }
