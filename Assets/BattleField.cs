@@ -50,6 +50,11 @@ public class BattleField : MonoBehaviour
         return Objects[(int)(coord.x), (int)(coord.y)];
     }
 
+    public GameObject GetCellAtCoords(Vector2 coord)
+    {
+        return Map[(int)(coord.x), (int)(coord.y)];
+    }
+
     // Update is called once per frame
     void Update()
     {

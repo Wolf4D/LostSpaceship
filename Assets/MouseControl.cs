@@ -44,14 +44,14 @@ public class MouseControl : MonoBehaviour
         //Debug.Log(toSelect);
         if (toSelect != SelectedObject)
         {
-            ProceedSelection(toSelect);
+            ProceedSelection(toSelect, coords);
             return true;
         }
 
         return false;
     }
 
-    void ProceedSelection(GameObject newObj)
+    void ProceedSelection(GameObject newObj, Vector2 coords)
     {
         MouseSelectionBorder.SetActive(false);
         SelectedObject = newObj;
@@ -59,7 +59,8 @@ public class MouseControl : MonoBehaviour
         if (SelectedObject != null)
         {
             MouseSelectionBorder.SetActive(true);
-            MouseSelectionBorder.transform.position = SelectedObject.transform.position;
+            GameObject cellSel = CurrentBattleField.GetCellAtCoords(coords);
+            MouseSelectionBorder.transform.position = cellSel.transform.position;
         }
         
 
