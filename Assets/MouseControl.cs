@@ -74,7 +74,9 @@ public class MouseControl : MonoBehaviour
         if (target == null)
         {
             // Проверим, может ли корабль двигаться?
-            if (CanMoveThere(coords))
+            Vector2 coordsInMoveZone = WalkZoneDemonstrator.GetComponent<DrawZone>().
+                                        CalcCoordsFromXYZ(WalkZoneDemonstrator.transform.InverseTransformPoint(cellUnderMouse.transform.position));
+            if (CanMoveThere(coordsInMoveZone))
                 Debug.Log("Move!");
             else
                 Debug.Log("No Move!");
