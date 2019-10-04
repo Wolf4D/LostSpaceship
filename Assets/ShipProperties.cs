@@ -21,6 +21,7 @@ public class ShipProperties : MonoBehaviour
     public int attackCooldownLeft = 0;
     public int moveSpeed;
     public bool hasMoved = false;
+    public string unitName;
 
     public int specialPropertyCooldownLeft = 0;
 
