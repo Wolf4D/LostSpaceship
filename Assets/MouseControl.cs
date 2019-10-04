@@ -11,6 +11,9 @@ public class MouseControl : MonoBehaviour
     public GameObject MouseSelectionBorder;
     public GameObject cellUnderMouse;
     public GameObject SelectedObject;
+    public GameObject WalkZoneDemonstrator;
+    public GameObject WalkZoneDemonstratorPrefab;
+
 
     public InformationPanel infoPanel;
 
@@ -25,6 +28,8 @@ public class MouseControl : MonoBehaviour
         MouseTrackBorder = Instantiate(MouseTrackBorder);
         MouseSelectionBorder = Instantiate(MouseSelectionBorder);
         MouseSelectionBorder.SetActive(false);
+        //WalkZoneDemonstrator = Instantiate(WalkZoneDemonstrator);
+        //WalkZoneDemonstrator.SetActive(false);
 
     }
 
@@ -59,6 +64,9 @@ public class MouseControl : MonoBehaviour
     {
         MouseSelectionBorder.SetActive(false);
         infoPanel.gameObject.SetActive(false);
+        if (WalkZoneDemonstrator != null)
+            Destroy(WalkZoneDemonstrator);
+
         SelectedObject = newObj;
 
         if (SelectedObject != null)
@@ -68,8 +76,19 @@ public class MouseControl : MonoBehaviour
             MouseSelectionBorder.transform.position = cellSel.transform.position;
             infoPanel.gameObject.SetActive(true);
             infoPanel.currentUnit = SelectedObject.GetComponent<ShipProperties>();
+
+
+
+            WalkZoneDemonstrator = Instantiate(WalkZoneDemonstratorPrefab);
+            WalkZoneDemonstrator.GetComponent<DrawZone>().radius = SelectedObject.GetComponent<ShipProperties>().speed;
+            WalkZoneDemonstrator.transform.position = cellSel.transform.position;
+
+            WalkZoneDemonstrator.SetActive(true);
+
         }
-        
+
+        // Покажем, как можно ходить
+
 
 
     }

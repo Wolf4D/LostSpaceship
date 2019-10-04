@@ -49,10 +49,10 @@ public class DrawZone : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         radius += 1;
-        Map = new GameObject[radius*2-1, radius*2-1];
+        Map = new GameObject[radius * 2 - 1, radius * 2 - 1];
 
         for (int j = 0; j < radius*2-1; j++)
             for (int i = 0; i < radius * 2 - 1; i++)
@@ -61,16 +61,16 @@ public class DrawZone : MonoBehaviour
                 switch (radius)
                 {
                     case 1: if ((i == 1) && (j == 1)) needAtThis = true; break;
-                    case 2: if (r2map[i,j] == 1) needAtThis = true; break;
+                    case 2: if (r2map[i, j] == 1) needAtThis = true; break;
                     case 3: if (r3map[i, j] == 1) needAtThis = true; break;
                     case 4: if (r4map[i, j] == 1) needAtThis = true; break;
                     case 5: if (r5map[i, j] == 1) needAtThis = true; break;
                 }
 
                 if (needAtThis)
-                { 
+                {
                     Map[i, j] = Instantiate(CellSample, this.transform);
-                    Map[i, j].transform.localPosition = CalcXYZfromCoords(i, j);
+                    Map[i, j].transform.localPosition = CalcXYZfromCoords(i-radius+1, j - radius+1);
                     Map[i, j].name = i + ", " + j;
                 }
             }
