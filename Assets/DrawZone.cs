@@ -38,6 +38,29 @@ public class DrawZone : MonoBehaviour
                                             { 0, 0, 0, 1, 1, 1, 0, 0, 0 },
                                             { 0, 0, 0, 0, 1, 0, 0, 0, 0 }};
 
+    public bool IsInZone(Vector3 xyz)
+    {
+        Vector2 tmp = CalcCoordsFromXYZ(xyz);
+        return IsInZone((int)(tmp.x), (int)(tmp.y));
+    }
+
+    public bool IsInZone(int x, int y)
+    {
+        //Debug.Log(x + " " + y + "   " + radius);
+        if ((x >= radius*2-1) || (y >= radius*2-1)) return false;
+        switch (radius)
+        {
+            case 1: if ((x == 1) && (y == 1)) return true; break;
+            case 2: if (r2map[x, y] == 1) return true; break;
+            case 3: if (r3map[x, y] == 1) return true; break;
+            case 4: if (r4map[x, y] == 1) return true; break;
+            case 5: if (r5map[x, y] == 1) return true; break;
+        }
+
+        return false;
+
+    }
+
     public Vector3 CalcXYZfromCoords(int x, int y)
     {
         return new Vector3(x * 2.0f * cellSideSize, 0, y * 2.0f * cellSideSize);
@@ -57,15 +80,8 @@ public class DrawZone : MonoBehaviour
         for (int j = 0; j < radius*2-1; j++)
             for (int i = 0; i < radius * 2 - 1; i++)
             {
-                bool needAtThis = false;
-                switch (radius)
-                {
-                    case 1: if ((i == 1) && (j == 1)) needAtThis = true; break;
-                    case 2: if (r2map[i, j] == 1) needAtThis = true; break;
-                    case 3: if (r3map[i, j] == 1) needAtThis = true; break;
-                    case 4: if (r4map[i, j] == 1) needAtThis = true; break;
-                    case 5: if (r5map[i, j] == 1) needAtThis = true; break;
-                }
+                bool needAtThis = IsInZone(i, j);
+               
 
                 if (needAtThis)
                 {

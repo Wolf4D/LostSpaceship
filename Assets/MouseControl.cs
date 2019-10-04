@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class MouseControl : MonoBehaviour
 {
 
@@ -14,9 +16,14 @@ public class MouseControl : MonoBehaviour
     public GameObject WalkZoneDemonstrator;
     public GameObject WalkZoneDemonstratorPrefab;
 
-
     public InformationPanel infoPanel;
 
+    public MouseModes currentMouseMode = MouseModes.SelectShip;
+    public enum MouseModes
+    {
+        SelectShip = 0,
+        ShipSelected = 1
+    };
 
     // private Camera cameraUI;
 
@@ -38,14 +45,60 @@ public class MouseControl : MonoBehaviour
     {
         ProbeBattleFieldsForHover();
 
-        if (Input.GetMouseButton(0))
-            TrySelect();
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (currentMouseMode == MouseModes.SelectShip)
+                TrySelect();
+            else
+                if (!TryCommand())
+                    TrySelect();
+        }
+    }
+
+    bool TryCommand()
+    {
+        Debug.Log("TC");
+
+        if ((CurrentBattleField == null) || (cellUnderMouse == null) || (SelectedObject==null))
+            return false;
+
+        // Узнаем, можем ли мы ещё действовать? Нет - сразу не команда
+        ShipProperties ship = SelectedObject.GetComponent<ShipProperties>();
+        if (ship.hasMoved) return false;
+
+        // Есть ли враг?
+        Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);
+        GameObject target = CurrentBattleField.GetObjectAtCoords(coords);
+
+        // Нет врага? Попробуем двигаться
+        if (target == null)
+        {
+            // Проверим, может ли корабль двигаться?
+            if (CanMoveThere(coords))
+                Debug.Log("Move!");
+            else
+                Debug.Log("No Move!");
+            return true;
+        }
+
+        return false;
+    }
+
+    bool CanMoveThere(Vector2 coords)
+    {
+        if (WalkZoneDemonstrator.GetComponent<DrawZone>().IsInZone(
+            (int)(coords.x), (int)(coords.y)))
+            return true;
+
+        return false;
     }
 
     bool TrySelect()
     {
-        if ((CurrentBattleField==null) || (cellUnderMouse == null))
+        if ((CurrentBattleField == null) || (cellUnderMouse == null))
+        {
             return false;
+        }
 
         Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);
         GameObject toSelect = CurrentBattleField.GetObjectAtCoords(coords);
@@ -56,7 +109,8 @@ public class MouseControl : MonoBehaviour
             ProceedSelection(toSelect, coords);
             return true;
         }
-
+ 
+        currentMouseMode = MouseModes.SelectShip;
         return false;
     }
 
@@ -78,6 +132,7 @@ public class MouseControl : MonoBehaviour
             infoPanel.currentUnit = SelectedObject.GetComponent<ShipProperties>();
 
 
+        // Покажем, как можно ходить
 
             WalkZoneDemonstrator = Instantiate(WalkZoneDemonstratorPrefab);
             WalkZoneDemonstrator.GetComponent<DrawZone>().radius = SelectedObject.GetComponent<ShipProperties>().speed;
@@ -85,10 +140,11 @@ public class MouseControl : MonoBehaviour
 
             WalkZoneDemonstrator.SetActive(true);
 
+            currentMouseMode = MouseModes.ShipSelected;
+            return;
         }
 
-        // Покажем, как можно ходить
-
+        currentMouseMode = MouseModes.SelectShip;
 
 
     }
