@@ -12,7 +12,7 @@ public class MouseControl : MonoBehaviour
     public GameObject cellUnderMouse;
     public GameObject SelectedObject;
 
-    
+    public InformationPanel infoPanel;
 
 
     // private Camera cameraUI;
@@ -58,6 +58,7 @@ public class MouseControl : MonoBehaviour
     void ProceedSelection(GameObject newObj, Vector2 coords)
     {
         MouseSelectionBorder.SetActive(false);
+        infoPanel.gameObject.SetActive(false);
         SelectedObject = newObj;
 
         if (SelectedObject != null)
@@ -65,6 +66,8 @@ public class MouseControl : MonoBehaviour
             MouseSelectionBorder.SetActive(true);
             GameObject cellSel = CurrentBattleField.GetCellAtCoords(coords);
             MouseSelectionBorder.transform.position = cellSel.transform.position;
+            infoPanel.gameObject.SetActive(true);
+            infoPanel.currentUnit = SelectedObject.GetComponent<ShipProperties>();
         }
         
 

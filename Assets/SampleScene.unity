@@ -474,8 +474,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: 209.99997}
-  m_SizeDelta: {x: 111.3, y: 30}
+  m_AnchoredPosition: {x: 38, y: 209.99997}
+  m_SizeDelta: {x: 129.3, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &405155069
 MonoBehaviour:
@@ -516,16 +516,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 21
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 58
+    m_MaxSize: 21
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health:   4'
+  m_Text: 'Health:   4 / 4'
 --- !u!222 &405155071
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -854,6 +854,7 @@ MonoBehaviour:
     type: 3}
   cellUnderMouse: {fileID: 0}
   SelectedObject: {fileID: 0}
+  infoPanel: {fileID: 1787497307}
 --- !u!1 &567608562
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,7 +6413,6 @@ GameObject:
   - component: {fileID: 1636050878}
   - component: {fileID: 1636050877}
   - component: {fileID: 1636050876}
-  - component: {fileID: 1636050880}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6500,29 +6500,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1636050880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636050875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c1ddd02bd8cca4396d9e90a05eb987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UnitName: {fileID: 1325906976}
-  PrepareState: {fileID: 1558242116}
-  Health: {fileID: 405155070}
-  Attack: {fileID: 1757946074}
-  AttackCoolDown: {fileID: 776500312}
-  AttackRange: {fileID: 648551446}
-  Speed: {fileID: 2145645108}
-  AbilityDesc: {fileID: 2007616198}
-  AbilityButton: {fileID: 431475200}
-  AbilityButtonText: {fileID: 929731282}
-  currentUnit: {fileID: 0}
 --- !u!1 &1682100434
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,14 +6694,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   side: 1
   HP: 4
-  attackDistance: 0
-  attackPower: 0
+  MaxHP: 4
+  speed: 3
+  attack: 0
   attackCooldown: 0
   attackCooldownLeft: 0
-  moveSpeed: 0
-  hasMoved: 0
+  range: 0
+  hasMoved: 1
   unitName: Harvester
-  specialPropertyCooldownLeft: 0
+  abilityCooldownLeft: 0
 --- !u!1 &1757946071
 GameObject:
   m_ObjectHideFlags: 0
@@ -6760,7 +6738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 135}
+  m_AnchoredPosition: {x: 21, y: 135}
   m_SizeDelta: {x: 110.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1757946073
@@ -7014,6 +6992,7 @@ GameObject:
   - component: {fileID: 1787497304}
   - component: {fileID: 1787497306}
   - component: {fileID: 1787497305}
+  - component: {fileID: 1787497307}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -7048,7 +7027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -90.4, y: 0}
+  m_AnchoredPosition: {x: -90.40039, y: 0}
   m_SizeDelta: {x: 513.4, y: 1122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787497305
@@ -7088,6 +7067,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787497303}
   m_CullTransparentMesh: 0
+--- !u!114 &1787497307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787497303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c1ddd02bd8cca4396d9e90a05eb987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UnitName: {fileID: 1325906976}
+  PrepareState: {fileID: 1558242116}
+  Health: {fileID: 405155070}
+  Attack: {fileID: 1757946074}
+  AttackCoolDown: {fileID: 776500312}
+  AttackRange: {fileID: 648551446}
+  Speed: {fileID: 2145645108}
+  AbilityDesc: {fileID: 2007616198}
+  AbilityButton: {fileID: 431475200}
+  AbilityButtonText: {fileID: 929731282}
+  currentUnit: {fileID: 0}
 --- !u!1 &1857959942
 GameObject:
   m_ObjectHideFlags: 0

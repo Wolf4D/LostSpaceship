@@ -15,15 +15,17 @@ public class ShipProperties : MonoBehaviour
     public BattleSides side = BattleSides.Earth;
 
     public int HP;
-    public int attackDistance;
-    public int attackPower;
+    public int MaxHP;
+
+    public int speed;
+    public int attack;
     public int attackCooldown;
     public int attackCooldownLeft = 0;
-    public int moveSpeed;
+    public int range;
     public bool hasMoved = false;
     public string unitName;
 
-    public int specialPropertyCooldownLeft = 0;
+    public int abilityCooldownLeft = 0;
 
     // Start is called before the first frame update
     void Start()
