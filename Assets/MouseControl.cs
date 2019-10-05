@@ -71,6 +71,45 @@ public class MouseControl : MonoBehaviour
         Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);
         GameObject target = CurrentBattleField.GetObjectAtCoords(coords);
 
+        // Есть враг?
+        if ((target != null) && (target!= SelectedObject))
+        {
+            if (ship.attackCooldownLeft > 0) return false;
+
+            ShipProperties targetShip = target.GetComponent<ShipProperties>();
+            if (ship.side == targetShip.side) return false;
+
+            // Проверим, может ли корабль выстрелить?
+            Vector2 coordsInMoveZone = FireZoneDemonstrator.GetComponent<DrawZone>().
+                                        CalcCoordsFromXYZ(FireZoneDemonstrator.transform.InverseTransformPoint(cellUnderMouse.transform.position));
+            if (CanFireThere(coordsInMoveZone))
+            {
+               // CurrentBattleField.MoveObject(
+               //     CurrentBattleField.CalcCoordsFromXYZ(SelectedObject.transform.localPosition),
+                //    coords);
+
+                ship.Attack(targetShip);
+                Debug.Log("Fire!");
+
+                if (WalkZoneDemonstrator != null)
+                    WalkZoneDemonstrator.SetActive(false);
+                if (FireZoneDemonstrator != null)
+                    FireZoneDemonstrator.SetActive(false);
+
+                //ProceedSelection(SelectedObject, coords);
+                ProceedSelection(null, new Vector2(-1, -1));
+                //MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
+                return true;
+            }
+            else
+            {
+                Debug.Log("No Fire!");
+                return false;
+            }
+
+
+        }
+
         // Нет врага? Попробуем двигаться
         if (target == null)
         {
@@ -109,6 +148,15 @@ public class MouseControl : MonoBehaviour
     bool CanMoveThere(Vector2 coords)
     {
         if (WalkZoneDemonstrator.GetComponent<DrawZone>().IsInZone(
+            (int)(coords.x), (int)(coords.y)))
+            return true;
+
+        return false;
+    }
+
+    bool CanFireThere(Vector2 coords)
+    {
+        if (FireZoneDemonstrator.GetComponent<DrawZone>().IsInZone(
             (int)(coords.x), (int)(coords.y)))
             return true;
 

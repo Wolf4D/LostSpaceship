@@ -42,6 +42,7 @@ public class DrawZone : MonoBehaviour
     {
         //Debug.Log(x + " " + y + "   " + radius);
         if ((x >= radius*2+1) || (y >= radius * 2+1)) return false;
+        if ((x < 0) || (y < 0)) return false;
         switch (radius)
         {
            
