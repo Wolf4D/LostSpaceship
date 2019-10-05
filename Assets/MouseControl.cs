@@ -84,11 +84,14 @@ public class MouseControl : MonoBehaviour
                     coords);
 
                 ship.Move(cellUnderMouse.transform.position);
-                Debug.Log("Move!");
+                //Debug.Log("Move!");
                 if (WalkZoneDemonstrator!=null)
                     WalkZoneDemonstrator.SetActive(false);
+                if (FireZoneDemonstrator != null)
+                    FireZoneDemonstrator.SetActive(false);
 
-                MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
+                ProceedSelection(SelectedObject, coords);
+                //MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
                 //return false;
             }
             else
@@ -194,8 +197,8 @@ public class MouseControl : MonoBehaviour
         { 
         MouseTrackBorder.transform.position = cellUnderMouse.transform.position;
         MouseTrackBorder.SetActive(true);
-            // Пока так
-            CurrentBattleField = cellUnderMouse.transform.parent.GetComponent<BattleField>();
+        // Пока так
+        CurrentBattleField = cellUnderMouse.transform.parent.GetComponent<BattleField>();
         }
     }
 
