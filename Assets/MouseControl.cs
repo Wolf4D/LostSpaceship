@@ -15,6 +15,9 @@ public class MouseControl : MonoBehaviour
     public GameObject SelectedObject;
     public GameObject WalkZoneDemonstrator;
     public GameObject WalkZoneDemonstratorPrefab;
+    public GameObject FireZoneDemonstrator;
+    public GameObject FireZoneDemonstratorPrefab;
+
 
     public InformationPanel infoPanel;
 
@@ -35,9 +38,7 @@ public class MouseControl : MonoBehaviour
         MouseTrackBorder = Instantiate(MouseTrackBorder);
         MouseSelectionBorder = Instantiate(MouseSelectionBorder);
         MouseSelectionBorder.SetActive(false);
-        //WalkZoneDemonstrator = Instantiate(WalkZoneDemonstrator);
-        //WalkZoneDemonstrator.SetActive(false);
-
+ 
     }
 
     // Update is called once per frame
@@ -139,6 +140,9 @@ public class MouseControl : MonoBehaviour
         if (WalkZoneDemonstrator != null)
             Destroy(WalkZoneDemonstrator);
 
+        if (FireZoneDemonstrator != null)
+            Destroy(FireZoneDemonstrator);
+
         SelectedObject = newObj;
 
         if (SelectedObject != null)
@@ -149,20 +153,31 @@ public class MouseControl : MonoBehaviour
             infoPanel.gameObject.SetActive(true);
             infoPanel.currentUnit = SelectedObject.GetComponent<ShipProperties>();
 
-            // Покажем, как можно ходить
             ShipProperties ship = SelectedObject.GetComponent<ShipProperties>();
 
+            // Покажем, как можно ходить
             WalkZoneDemonstrator = Instantiate(WalkZoneDemonstratorPrefab);
             WalkZoneDemonstrator.GetComponent<DrawZone>().radius = SelectedObject.GetComponent<ShipProperties>().speed;
             WalkZoneDemonstrator.transform.position = cellSel.transform.position;
-
             WalkZoneDemonstrator.SetActive(true);
 
+            // Покажем, как можно стрелять
+            FireZoneDemonstrator = Instantiate(FireZoneDemonstratorPrefab);
+            FireZoneDemonstrator.GetComponent<DrawZone>().radius = SelectedObject.GetComponent<ShipProperties>().range;
+            FireZoneDemonstrator.transform.position = cellSel.transform.position;
+            FireZoneDemonstrator.SetActive(true);
+
+            if (ship.range==0)
+                FireZoneDemonstrator.SetActive(false);
+
             if (ship.hasMoved)
+            { 
                 WalkZoneDemonstrator.SetActive(false);
+                FireZoneDemonstrator.SetActive(false);
 
+            }
 
-                currentMouseMode = MouseModes.ShipSelected;
+            currentMouseMode = MouseModes.ShipSelected;
             return;
         }
 
