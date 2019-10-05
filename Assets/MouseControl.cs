@@ -78,8 +78,17 @@ public class MouseControl : MonoBehaviour
                                         CalcCoordsFromXYZ(WalkZoneDemonstrator.transform.InverseTransformPoint(cellUnderMouse.transform.position));
             if (CanMoveThere(coordsInMoveZone))
             {
+                CurrentBattleField.MoveObject(
+                    CurrentBattleField.CalcCoordsFromXYZ(SelectedObject.transform.localPosition),
+                    coords);
+
                 ship.Move(cellUnderMouse.transform.position);
                 Debug.Log("Move!");
+                if (WalkZoneDemonstrator!=null)
+                    WalkZoneDemonstrator.SetActive(false);
+
+                MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
+                //return false;
             }
             else
             { 
@@ -140,8 +149,8 @@ public class MouseControl : MonoBehaviour
             infoPanel.gameObject.SetActive(true);
             infoPanel.currentUnit = SelectedObject.GetComponent<ShipProperties>();
 
-
-        // Покажем, как можно ходить
+            // Покажем, как можно ходить
+            ShipProperties ship = SelectedObject.GetComponent<ShipProperties>();
 
             WalkZoneDemonstrator = Instantiate(WalkZoneDemonstratorPrefab);
             WalkZoneDemonstrator.GetComponent<DrawZone>().radius = SelectedObject.GetComponent<ShipProperties>().speed;
@@ -149,7 +158,11 @@ public class MouseControl : MonoBehaviour
 
             WalkZoneDemonstrator.SetActive(true);
 
-            currentMouseMode = MouseModes.ShipSelected;
+            if (ship.hasMoved)
+                WalkZoneDemonstrator.SetActive(false);
+
+
+                currentMouseMode = MouseModes.ShipSelected;
             return;
         }
 

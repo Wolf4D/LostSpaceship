@@ -74,5 +74,6 @@ public class ShipProperties : MonoBehaviour
     {
         target = new Vector3(ctarget.x, this.transform.position.y, ctarget.z);
         command = Commands.Move;
+        hasMoved = true;
     }
 }

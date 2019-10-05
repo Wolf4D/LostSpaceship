@@ -22,6 +22,13 @@ public class BattleField : MonoBehaviour
         return new Vector2(Mathf.RoundToInt(xyz.x / (2.0f * cellSideSize)), Mathf.RoundToInt(xyz.z / (2.0f * cellSideSize)));
     }
 
+    public void MoveObject(Vector2 from, Vector2 to)
+    {
+        GameObject obj = Objects[(int)(from.x), (int)(from.y)];
+        Objects[(int)(to.x), (int)(to.y)] = obj;
+        Objects[(int)(from.x), (int)(from.y)] = null;
+    }
+
 
     // Start is called before the first frame update
     void Start()

@@ -39,7 +39,7 @@ public class InformationPanel : MonoBehaviour
         }
         else
         {
-            PrepareState.text = "Not ready!";
+            PrepareState.text = "Already moved";
         }
         Health.text = "Health:   " + currentUnit.HP + " / " + currentUnit.MaxHP;
         Attack.text = "Attack:   " + currentUnit.attack;
