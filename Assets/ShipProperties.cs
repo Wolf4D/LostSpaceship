@@ -12,6 +12,8 @@ public class ShipProperties : MonoBehaviour
         Heretic = 3
     };
 
+    public BattleField battleField;
+
     public BattleSides side = BattleSides.Earth;
 
     public int HP;
@@ -29,11 +31,16 @@ public class ShipProperties : MonoBehaviour
 
     private Vector3 target;
 
+    public Cannon cannon;
+    public float dieTime = 3.0f;
+    public GameObject dieEffect;
+
     public enum Commands
     {
         Stand = 0,
         Move = 1,
-        Attack = 2
+        Attack = 2,
+        Die = 3
     };
 
     public Commands command = Commands.Stand;
@@ -94,7 +101,28 @@ public class ShipProperties : MonoBehaviour
             case (Commands.Attack):
                 {
                     if (SmoothRotate())
+                    {
+                        cannon.gameObject.SetActive(true);
+                        cannon.Fire();
                         command = Commands.Stand;
+                    }
+                }
+                break;
+
+            case (Commands.Die):
+                {
+                    dieTime -= Time.deltaTime;
+                    if (!dieEffect.activeSelf)
+                    {
+                        dieEffect.SetActive(true);
+                    }
+                    else
+                    {
+                        if (dieTime <= 0)
+                            Destroy(this.gameObject);
+                    }
+
+              
                 }
                 break;
         }
@@ -110,7 +138,18 @@ public class ShipProperties : MonoBehaviour
     public void Attack(ShipProperties ctarget)
     {
         target = new Vector3(ctarget.transform.position.x, this.transform.position.y, ctarget.transform.position.z);
+        // Все настройки пушки - тут
+        cannon.target = ctarget;
+        cannon.damage = attack;
+
         command = Commands.Attack;
         hasMoved = true;
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        HP -= damage;
+
+        if (HP <= 0) command = Commands.Die;
     }
 }
