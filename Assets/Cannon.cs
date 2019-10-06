@@ -37,18 +37,25 @@ public class Cannon : MonoBehaviour
         {
             if (delayLeftToWait <= 0)
             {
-                target.ReceiveDamage(damage);
-                GameObject tmp = Instantiate(partSystemHit, target.transform);
-                tmp.transform.position = target.transform.position;
-                tmp.SetActive(true);
+                if (!target.ReceiveDamage(damage))
+                {
+                    GameObject tmp = Instantiate(partSystemHit, target.transform);
+                    tmp.transform.position = target.transform.position;
+                    tmp.transform.LookAt(this.transform);
+                    tmp.SetActive(true);
+                    delayLeftToWait = effectTime;
+                }
+                else
+                    delayLeftToWait = target.dieTime / 4.0f;
+
                 target = null;
-                delayLeftToWait = effectTime;
+                //delayLeftToWait = effectTime;
             }
         }
         else
         {
             if (delayLeftToWait <= 0)
-                gameObject.SetActive(false);
+               this.gameObject.SetActive(false);
 
 
         }

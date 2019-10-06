@@ -115,14 +115,14 @@ public class ShipProperties : MonoBehaviour
                     if (!dieEffect.activeSelf)
                     {
                         dieEffect.SetActive(true);
+                        dieEffect.transform.parent = transform.parent;
+                        this.GetComponentInChildren<MeshRenderer>().enabled = false;
                     }
                     else
                     {
                         if (dieTime <= 0)
                             Destroy(this.gameObject);
                     }
-
-              
                 }
                 break;
         }
@@ -146,10 +146,15 @@ public class ShipProperties : MonoBehaviour
         hasMoved = true;
     }
 
-    public void ReceiveDamage(int damage)
+    public bool ReceiveDamage(int damage)
     {
         HP -= damage;
+        if (HP <= 0)
+        {
+            command = Commands.Die;
+            return true;
+        }
 
-        if (HP <= 0) command = Commands.Die;
+        return false;
     }
 }
