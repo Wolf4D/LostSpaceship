@@ -9,6 +9,7 @@ public class MouseControl : MonoBehaviour
 
     public BattleField[] BattleFields;
     public BattleField CurrentBattleField = null;
+    public TurnSystem turnSystem = null;
     public GameObject MouseTrackBorder;
     public GameObject MouseSelectionBorder;
     public GameObject cellUnderMouse;
@@ -34,6 +35,8 @@ public class MouseControl : MonoBehaviour
     void Start()
     {
         BattleFields = FindObjectsOfType<BattleField>();
+        turnSystem = FindObjectOfType<TurnSystem>();
+
         //cameraUI = GetComponent<Camera>();
         MouseTrackBorder = Instantiate(MouseTrackBorder);
         MouseSelectionBorder = Instantiate(MouseSelectionBorder);
@@ -98,6 +101,7 @@ public class MouseControl : MonoBehaviour
 
                 //ProceedSelection(SelectedObject, coords);
                 ProceedSelection(null, new Vector2(-1, -1));
+                turnSystem.OneActionMade();
                 //MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
                 return true;
             }
@@ -130,6 +134,9 @@ public class MouseControl : MonoBehaviour
                     FireZoneDemonstrator.SetActive(false);
 
                 ProceedSelection(SelectedObject, coords);
+                turnSystem.OneActionMade();
+
+                return true;
                 //MouseSelectionBorder.transform.position = cellUnderMouse.transform.position;
                 //return false;
             }
@@ -139,7 +146,7 @@ public class MouseControl : MonoBehaviour
                 return false;
             }
 
-            return true;
+            //return true;
         }
 
         return false;
