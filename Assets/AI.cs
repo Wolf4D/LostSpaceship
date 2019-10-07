@@ -45,8 +45,8 @@ public class AI : MonoBehaviour
 
         Vector2 resultDirection = targetPos - myPos;
 
-        Debug.Log(myPos);
-        Debug.Log(targetPos);
+        //Debug.Log(myPos);
+        //Debug.Log(targetPos);
 
         if (resultDirection.magnitude > ship.range)
         {
@@ -72,6 +72,47 @@ public class AI : MonoBehaviour
         //Debug.Log(resultDirection.magnitude);
 
         //Debug.Log(ship.name);
+    }
+
+    void CaptureBeacon(ShipProperties ship)
+    {
+        float nearDist = 999999;
+        Beacon nearestEnemyBeacon = null;
+        foreach (ShipProperties shp in myShips)
+            {
+                // Близость к маякам
+                foreach (Beacon bc in enemyBeacons)
+                {
+                    float dist = Vector3.Distance(shp.transform.localPosition, bc.transform.localPosition);
+                    if (dist < nearDist)
+                    {
+                        nearDist = dist;
+                        nearestEnemyBeacon = bc;
+                    }
+                }
+            }
+
+
+
+        Vector2 myPos = battlefield.CalcCoordsFromXYZ(ship.transform.localPosition);
+        Vector2 targetPos = battlefield.CalcCoordsFromXYZ(nearestEnemyBeacon.transform.localPosition);
+
+        Vector2 resultDirection = targetPos - myPos;
+
+
+            resultDirection = resultDirection.normalized * (ship.speed);
+            Vector2 newPos = myPos + resultDirection;
+    
+            if (battlefield.GetObjectAtCoords(newPos) != null) return;
+
+
+            battlefield.MoveObject(myPos, newPos);
+            ship.Move(battlefield.transform.TransformPoint(battlefield.CalcXYZfromCoords((int)(newPos.x), (int)(newPos.y))));
+            turnSystem.OneActionMade();
+            return;
+ 
+
+
     }
 
     public void BuildUnit()
@@ -125,6 +166,21 @@ public class AI : MonoBehaviour
                         //if (attackerNum<=3)
                         if (!currentTaskForce[attackerNum].hasMoved)
                             PerformAttack(currentTaskForce[attackerNum]);
+                    }
+                    else
+                    {
+                        BuildUnit();
+                    }
+                } break;
+
+            case (AITasks.HuntBeacons):
+                {
+                    if (FindTaskForce(nearestEnemy.transform.localPosition))
+                    {
+                        // Нашли кем атаковать!
+                        int attackerNum = Random.Range(0, 4);
+                        if (!currentTaskForce[attackerNum].hasMoved)
+                            CaptureBeacon(currentTaskForce[attackerNum]);
                     }
                     else
                     {
