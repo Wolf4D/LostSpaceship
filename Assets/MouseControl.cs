@@ -61,7 +61,7 @@ public class MouseControl : MonoBehaviour
 
     bool TryCommand()
     {
-        Debug.Log("TC");
+        //Debug.Log("TC");
 
         if ((CurrentBattleField == null) || (cellUnderMouse == null) || (SelectedObject==null))
             return false;

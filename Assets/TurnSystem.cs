@@ -15,10 +15,12 @@ public class TurnSystem : MonoBehaviour
     public GameObject[] turnBeginEffect;
     public GameObject[] sideLogoBanner;
 
+    public SidesStats sides;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sides = FindObjectOfType<SidesStats>();
     }
 
     public void OneActionMade()
@@ -33,6 +35,9 @@ public class TurnSystem : MonoBehaviour
 
     public void NextTurn()
     {
+        sides.CheckBeacons();
+        sides.CollectMoney(currentSide);
+
         ShipProperties[] allShips = FindObjectsOfType<ShipProperties>();
 
         foreach (ShipProperties shp in allShips)
@@ -60,6 +65,7 @@ public class TurnSystem : MonoBehaviour
         sideLogoBanner[(int)(currentSide) - 1].SetActive(true);
 
         actionsCounterForSide = 4;
+
     }
 
     // Update is called once per frame

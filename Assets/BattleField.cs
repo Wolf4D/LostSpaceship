@@ -40,9 +40,11 @@ public class BattleField : MonoBehaviour
             Vector2 coord = CalcCoordsFromXYZ(obj.transform.localPosition);
             //Debug.Log("" + obj.name + ":" + coord.x + "," + coord.y);
             if (obj.GetComponent<ShipProperties>())
+            { 
                 (obj.GetComponent<ShipProperties>()).battleField = this;
 
-            Objects[(int)(coord.x), (int)(coord.y)] = obj;
+                Objects[(int)(coord.x), (int)(coord.y)] = obj;
+            }
         }
 
         Map = new GameObject[x, y];

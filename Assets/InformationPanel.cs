@@ -54,8 +54,8 @@ public class InformationPanel : MonoBehaviour
         else
             AttackCoolDown.text = "Reload " + currentUnit.attackCooldownLeft + " turns";
 
-        AttackRange.text = "Range:   " + currentUnit.speed;
-        Speed.text = "Speed:   " + currentUnit.range;
+        AttackRange.text = "Range:   " + currentUnit.range;
+        Speed.text = "Speed:   " + currentUnit.speed;
 
         if (currentUnit.abilityCooldownLeft > 0)
         {
