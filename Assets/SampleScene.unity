@@ -2243,6 +2243,7 @@ GameObject:
   - component: {fileID: 534669906}
   - component: {fileID: 534669907}
   - component: {fileID: 534669908}
+  - component: {fileID: 534669909}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2280,7 +2281,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: -30
   far clip plane: 10011.5
   field of view: 62
   orthographic: 1
@@ -2373,6 +2374,28 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 998c03065b0bf794bb485c06b76d6894, type: 2}
   - {fileID: 2100000, guid: 82be87e82a9cb434699f3bcd47413ca0, type: 2}
   - {fileID: 2100000, guid: 182faf5ec5a87bb4ba198856e559ab2c, type: 2}
+--- !u!114 &534669909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5273e04d22f0b44b8b88b12bce80757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TheCamera: {fileID: 534669904}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  useDefaultSettings: 0
+  cameraSpeed: 46
+  cameraBorder: 14.7
+  cameraMinHeight: 74
+  cameraMaxHeight: 74
+  mapSize: 200
 --- !u!114 &535695603 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 378217044268330124, guid: c76d26260ece89e4bb6582e243977430,
