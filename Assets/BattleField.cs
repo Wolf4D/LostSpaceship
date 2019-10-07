@@ -29,23 +29,23 @@ public class BattleField : MonoBehaviour
         Objects[(int)(from.x), (int)(from.y)] = null;
     }
 
+    public void ClampObjectToGrid(GameObject obj)
+    {
+        Vector2 coord = CalcCoordsFromXYZ(obj.transform.localPosition);
+        if (obj.GetComponent<ShipProperties>())
+        {
+            (obj.GetComponent<ShipProperties>()).battleField = this;
+            Objects[(int)(coord.x), (int)(coord.y)] = obj;
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
         Objects = new GameObject[x, y];
         for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject obj = transform.GetChild(i).gameObject;
-            Vector2 coord = CalcCoordsFromXYZ(obj.transform.localPosition);
-            //Debug.Log("" + obj.name + ":" + coord.x + "," + coord.y);
-            if (obj.GetComponent<ShipProperties>())
-            { 
-                (obj.GetComponent<ShipProperties>()).battleField = this;
-
-                Objects[(int)(coord.x), (int)(coord.y)] = obj;
-            }
-        }
+            ClampObjectToGrid(transform.GetChild(i).gameObject);
 
         Map = new GameObject[x, y];
         for (int j = 0; j < y; j++)

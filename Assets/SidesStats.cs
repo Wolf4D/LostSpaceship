@@ -33,9 +33,22 @@ public class SidesStats : MonoBehaviour
         }
     }
 
-    public bool GetSomeForMoney(ShipProperties.BattleSides side, int cost)
+
+    public bool CanGetSomeForMoney(ShipProperties.BattleSides side, int cost)
     {
         if (MoneyOfSide[(int)(side)] <= cost)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool GetSomeForMoney(ShipProperties.BattleSides side, int cost)
+    {
+        Debug.Log("MoneyOfSide " + side + " " + MoneyOfSide[(int)(side)]);
+
+        if (MoneyOfSide[(int)(side)] >= cost)
         {
             MoneyOfSide[(int)(side)] -= cost;
             return true;

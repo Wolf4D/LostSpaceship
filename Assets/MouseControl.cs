@@ -18,6 +18,11 @@ public class MouseControl : MonoBehaviour
     public GameObject WalkZoneDemonstratorPrefab;
     public GameObject FireZoneDemonstrator;
     public GameObject FireZoneDemonstratorPrefab;
+    public SidesStats Stats;
+    public UnitSpawner Spawner;
+    //public GameObject UnitToPlace;
+    public GameObject UnitToSpawnAtMouse;
+    public int UnitToSpawnCost = -1;
 
 
     public InformationPanel infoPanel;
@@ -26,7 +31,8 @@ public class MouseControl : MonoBehaviour
     public enum MouseModes
     {
         SelectShip = 0,
-        ShipSelected = 1
+        ShipSelected = 1,
+        ShipPlacing = 2
     };
 
     // private Camera cameraUI;
@@ -36,11 +42,13 @@ public class MouseControl : MonoBehaviour
     {
         BattleFields = FindObjectsOfType<BattleField>();
         turnSystem = FindObjectOfType<TurnSystem>();
+        Spawner = FindObjectOfType<UnitSpawner>();
 
         //cameraUI = GetComponent<Camera>();
         MouseTrackBorder = Instantiate(MouseTrackBorder);
         MouseSelectionBorder = Instantiate(MouseSelectionBorder);
         MouseSelectionBorder.SetActive(false);
+
  
     }
 
@@ -51,12 +59,21 @@ public class MouseControl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (currentMouseMode == MouseModes.SelectShip)
-                TrySelect();
-            else
-                if (!TryCommand())
-                    TrySelect();
+            switch (currentMouseMode)
+            {
+                case (MouseModes.SelectShip): { TrySelect(); } ; break;
+                case (MouseModes.ShipSelected):
+                    { 
+                        if (!TryCommand())
+                            TrySelect();
+                    }; break;
+                case (MouseModes.ShipPlacing): { TryPlace(); }; break;
+
+            }
         }
+
+        if (Input.GetMouseButtonDown(1))
+            currentMouseMode = MouseModes.SelectShip;
     }
 
     bool TryCommand()
@@ -167,6 +184,33 @@ public class MouseControl : MonoBehaviour
             (int)(coords.x), (int)(coords.y)))
             return true;
 
+        return false;
+    }
+
+    bool TryPlace()
+    {
+        if (UnitToSpawnAtMouse == null) return false;
+        if ((CurrentBattleField == null) || (cellUnderMouse == null))
+        {
+            return false;
+        }
+
+        Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);
+        GameObject toSelect = CurrentBattleField.GetObjectAtCoords(coords);
+
+        Debug.Log("TP " + toSelect);
+        if (toSelect == null)
+        {
+            Debug.Log("SPN " + UnitToSpawnAtMouse);
+
+            Spawner.SpawnUnit(ShipProperties.BattleSides.Earth, UnitToSpawnAtMouse, UnitToSpawnCost, coords);
+
+            currentMouseMode = MouseModes.SelectShip;
+            // ProceedPlace(coords);
+            return true;
+        }
+
+        //currentMouseMode = MouseModes.SelectShip;
         return false;
     }
 
@@ -285,5 +329,45 @@ public class MouseControl : MonoBehaviour
         //  CreatureSelected.Invoke(selected);
 
     }
+
+    void ProceedPlace(Vector2 coords)
+    {
+       // if (Stats.GetSomeForMoney())
+       // {
+          //  UnitSpawner
+        //}
+
+
+    }
+
+    public void SpawnUnit(UnitCard unit)
+    {
+        Debug.Log("Got spawn");
+
+        MouseSelectionBorder.SetActive(false);
+        infoPanel.gameObject.SetActive(false);
+        if (WalkZoneDemonstrator != null)
+            Destroy(WalkZoneDemonstrator);
+
+        if (FireZoneDemonstrator != null)
+            Destroy(FireZoneDemonstrator);
+
+        UnitToSpawnAtMouse = unit.ShipToBuy;
+        UnitToSpawnCost = unit.Cost;
+        currentMouseMode = MouseModes.ShipPlacing;
+    }
+
+    // Это плохооооо!
+    /*
+    public void SpawnFighter(int side) 
+    {
+        if (Stats.GetSomeForMoney()
+        //Debug.Log("AA "  + " " + side);
+
+    }
+
+ 
+    */
+
 
 }
