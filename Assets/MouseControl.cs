@@ -346,7 +346,7 @@ public class MouseControl : MonoBehaviour
 
     }
 
-    void DropSelections()
+    public void DropSelections()
     {
         MouseSelectionBorder.SetActive(false);
         infoPanel.gameObject.SetActive(false);

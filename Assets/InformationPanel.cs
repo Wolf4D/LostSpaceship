@@ -57,6 +57,8 @@ public class InformationPanel : MonoBehaviour
         AttackRange.text = "Range:   " + currentUnit.range;
         Speed.text = "Speed:   " + currentUnit.speed;
 
+        AbilityDesc.text = "LOCKED"; currentUnit.abilityCooldownLeft = 999;
+
         if (currentUnit.abilityCooldownLeft > 0)
         {
             AbilityButton.interactable = false;

@@ -130,6 +130,14 @@ public class AI : MonoBehaviour
                     nearestBeacon = bc;
             }
         }
+
+        if (nearestBeacon == null)
+        {
+            turnSystem.OneActionMade();
+            return;
+        }
+
+
         int ShipNumber = Random.Range(0, 13);
 
         Vector2 coords = battlefield.CalcCoordsFromXYZ(nearestBeacon.transform.localPosition);
@@ -145,7 +153,6 @@ public class AI : MonoBehaviour
     {
         if (nearestEnemy == null)
             solutionTries = -1;
-
 
         if (solutionTries <= 0)
             BuildUnit();
@@ -175,6 +182,8 @@ public class AI : MonoBehaviour
 
             case (AITasks.HuntBeacons):
                 {
+                    if (nearestEnemy!=null)
+                    { 
                     if (FindTaskForce(nearestEnemy.transform.localPosition))
                     {
                         // Нашли кем атаковать!
@@ -185,6 +194,7 @@ public class AI : MonoBehaviour
                     else
                     {
                         BuildUnit();
+                    }
                     }
                 } break;
         }

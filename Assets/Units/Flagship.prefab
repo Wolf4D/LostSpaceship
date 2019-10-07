@@ -28298,11 +28298,12 @@ MonoBehaviour:
   attackCooldownLeft: 0
   range: 4
   hasMoved: 0
-  unitName: Dreadnought
+  unitName: Flagship
   abilityCooldownLeft: 0
   cannon: {fileID: 2143301356098016663}
   dieTime: 3
   dieEffect: {fileID: 4306988984472255041}
+  isAlive: 1
   command: 0
 --- !u!64 &6316334697038366120
 MeshCollider:

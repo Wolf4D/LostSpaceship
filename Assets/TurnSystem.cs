@@ -9,6 +9,7 @@ public class TurnSystem : MonoBehaviour
     ShipProperties.BattleSides currentSide = ShipProperties.BattleSides.Earth;
     public int actionsCounterForSide = 4;
     public Color disableColor;
+    public MouseControl mouse;
 
     public GameObject[] turnIndicators;
 
@@ -24,6 +25,7 @@ public class TurnSystem : MonoBehaviour
     void Start()
     {
         sides = FindObjectOfType<SidesStats>();
+        mouse = FindObjectOfType<MouseControl>();
     }
 
     public void OneActionMade()
@@ -38,6 +40,8 @@ public class TurnSystem : MonoBehaviour
 
     public void NextTurn()
     {
+        mouse.DropSelections();
+
         if (AsuraAI != null)  AsuraAI.isMyTurn = false;
         if (AsuraAI != null) AsuraAI.isMyTurn = false;
 
@@ -61,7 +65,14 @@ public class TurnSystem : MonoBehaviour
             case (ShipProperties.BattleSides.Heretic): { currentSide = ShipProperties.BattleSides.Earth; } break;
         }
 
-        for(int i=0; i<4; i++)
+        // Проверка того, есть ли эта сторона на карте
+        //if ((currentSide== ShipProperties.BattleSides.Asura) && (AsuraAI == null))
+        //    currentSide = ShipProperties.BattleSides.Heretic;
+
+       // if ((currentSide == ShipProperties.BattleSides.Heretic) && (HereticAI == null))
+        //    currentSide = ShipProperties.BattleSides.Earth;
+
+        for (int i=0; i<4; i++)
             turnIndicators[i].GetComponent<Image>().color = Color.white;
 
         turnBeginEffect[(int)(currentSide)-1].SetActive(false);
