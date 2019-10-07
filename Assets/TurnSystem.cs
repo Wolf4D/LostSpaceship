@@ -17,6 +17,9 @@ public class TurnSystem : MonoBehaviour
 
     public SidesStats sides;
 
+    public AI AsuraAI;
+    public AI HereticAI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +66,14 @@ public class TurnSystem : MonoBehaviour
 
         sideLogoBanner[(int)(currentSide) - 1].SetActive(false);
         sideLogoBanner[(int)(currentSide) - 1].SetActive(true);
+
+        if (AsuraAI!=null)
+        if (currentSide == ShipProperties.BattleSides.Asura)
+            AsuraAI.MakeTurn();
+
+        if (HereticAI != null)
+            if (currentSide == ShipProperties.BattleSides.Heretic)
+            HereticAI.MakeTurn();
 
         actionsCounterForSide = 4;
 
