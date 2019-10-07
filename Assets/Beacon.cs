@@ -7,6 +7,9 @@ public class Beacon : MonoBehaviour
     public ShipProperties.BattleSides currentSide = ShipProperties.BattleSides.Neutral;
     float searchRadius = 5.0f;
     public BattleField CurrentBattleField;
+    public GameObject SpawnZone;
+    public GameObject SpawnZonePrefab;
+
     Vector2 coords;
 
     SidesStats stats;
@@ -15,6 +18,20 @@ public class Beacon : MonoBehaviour
     {
         stats = FindObjectOfType<SidesStats>();
         CurrentBattleField = FindObjectOfType<BattleField>();
+
+    }
+
+    public void LightBeacon()
+    {
+        SpawnZone = Instantiate(SpawnZonePrefab);
+        SpawnZone.GetComponent<DrawZone>().radius = 2;
+        SpawnZone.transform.position = this.transform.position;
+        SpawnZone.SetActive(true);
+    }
+
+    public void ShutBeacon()
+    {
+        Destroy(SpawnZone);
     }
 
    public void checkCapture()

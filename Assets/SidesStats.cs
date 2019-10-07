@@ -33,6 +33,19 @@ public class SidesStats : MonoBehaviour
         }
     }
 
+    public void TurnAllBeacons(ShipProperties.BattleSides side, bool on)
+    {
+        foreach (Beacon bc in Beacons)
+        {
+            if (side == bc.currentSide)
+            {
+                if (on)
+                    bc.LightBeacon();
+                else
+                    bc.ShutBeacon();
+            }
+        }
+    }
 
     public bool CanGetSomeForMoney(ShipProperties.BattleSides side, int cost)
     {

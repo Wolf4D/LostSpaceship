@@ -43,6 +43,7 @@ public class MouseControl : MonoBehaviour
         BattleFields = FindObjectsOfType<BattleField>();
         turnSystem = FindObjectOfType<TurnSystem>();
         Spawner = FindObjectOfType<UnitSpawner>();
+        Stats = FindObjectOfType<SidesStats>();
 
         //cameraUI = GetComponent<Camera>();
         MouseTrackBorder = Instantiate(MouseTrackBorder);
@@ -73,7 +74,10 @@ public class MouseControl : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(1))
+        { 
             currentMouseMode = MouseModes.SelectShip;
+            DropSelections();
+        }
     }
 
     bool TryCommand()
@@ -206,6 +210,8 @@ public class MouseControl : MonoBehaviour
             Spawner.SpawnUnit(ShipProperties.BattleSides.Earth, UnitToSpawnAtMouse, UnitToSpawnCost, coords);
 
             currentMouseMode = MouseModes.SelectShip;
+            Stats.TurnAllBeacons(ShipProperties.BattleSides.Earth, false);
+
             // ProceedPlace(coords);
             return true;
         }
@@ -340,10 +346,8 @@ public class MouseControl : MonoBehaviour
 
     }
 
-    public void SpawnUnit(UnitCard unit)
+    void DropSelections()
     {
-        Debug.Log("Got spawn");
-
         MouseSelectionBorder.SetActive(false);
         infoPanel.gameObject.SetActive(false);
         if (WalkZoneDemonstrator != null)
@@ -351,6 +355,17 @@ public class MouseControl : MonoBehaviour
 
         if (FireZoneDemonstrator != null)
             Destroy(FireZoneDemonstrator);
+
+        SelectedObject = null;
+    }
+
+    public void SpawnUnit(UnitCard unit)
+    {
+        Debug.Log("Got spawn");
+
+        DropSelections();
+
+        Stats.TurnAllBeacons(ShipProperties.BattleSides.Earth, true);
 
         UnitToSpawnAtMouse = unit.ShipToBuy;
         UnitToSpawnCost = unit.Cost;
