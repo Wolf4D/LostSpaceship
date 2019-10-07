@@ -7,6 +7,9 @@ public class AI : MonoBehaviour
     private SidesStats stats;
     public ShipProperties.BattleSides mySide = ShipProperties.BattleSides.Asura;
 
+    public BattleField battlefield;
+    public TurnSystem turnSystem;
+
     public List<ShipProperties> myShips = new List<ShipProperties>();
     public List<ShipProperties> enemyShips = new List<ShipProperties>();
 
@@ -16,36 +19,138 @@ public class AI : MonoBehaviour
     public ShipProperties[] currentTaskForce = new ShipProperties[4];
     public int TaskForceCoreMinimum = 10;     // минимальная сила ядра группы
     public float TaskForcePowerMinimum = 50.0f; // Только для проверок сплочённости
+    public UnitSpawner Spawner;
 
     public float enemyDistanceRage = 10000.0f;
 
+    public ShipProperties nearestEnemy = null;
+    public float nearestDistance = 9999999;
+    public int solutionTries = 5;
 
+    public bool isMyTurn = false;
 
     public enum AITasks
     {
         BuildForces = 0,
-        //HuntBase = 1,
         HuntBeacons = 1,
-        //DefendBeacons = 3,
         AttackNearest = 2
     };
 
     public AITasks currentTask = AITasks.AttackNearest;
 
-    
+    bool PerformAttack(ShipProperties ship)
+    {
+        Vector2 myPos = battlefield.CalcCoordsFromXYZ(ship.transform.localPosition);
+        Vector2 targetPos = battlefield.CalcCoordsFromXYZ(nearestEnemy.transform.localPosition);
+
+        Vector2 resultDirection = targetPos - myPos;
+
+        Debug.Log(myPos);
+        Debug.Log(targetPos);
+
+        if (resultDirection.magnitude > ship.range)
+        {
+            resultDirection = resultDirection.normalized * (ship.speed - 1);
+            Debug.Log(resultDirection);
+            Vector2 newPos = myPos + resultDirection;
+
+            if (battlefield.GetObjectAtCoords(newPos) != null)
+                return false;
+           
+
+            battlefield.MoveObject(myPos, newPos);
+            ship.Move(battlefield.transform.TransformPoint(battlefield.CalcXYZfromCoords((int)(newPos.x), (int)(newPos.y))));
+            turnSystem.OneActionMade();
+            return true;
+        }
+        else
+        {
+            ship.Attack(nearestEnemy);
+            turnSystem.OneActionMade();
+            return true;
+        }
+        //Debug.Log(resultDirection.magnitude);
+
+        //Debug.Log(ship.name);
+    }
+
+    public void BuildUnit()
+    {
+        // TODO: Если негде построить - просто ход пропустим!!!
+        float nearestDist=999999;
+        Beacon nearestBeacon = null;
+        if (nearestEnemy!=null)
+        foreach (Beacon bc in myBeacons)
+        {
+            float dist = Vector3.Distance(nearestEnemy.transform.localPosition, bc.transform.localPosition);
+            if (dist < nearestDist)
+            {
+                    nearestDist = dist;
+                    nearestBeacon = bc;
+            }
+        }
+        int ShipNumber = Random.Range(0, 13);
+
+        Vector2 coords = battlefield.CalcCoordsFromXYZ(nearestBeacon.transform.localPosition);
+        if (battlefield.GetObjectAtCoords(coords) == null)
+            Spawner.SpawnUnit(mySide, Spawner.SpawnablePrefabs[ShipNumber].ShipToBuy,
+                Spawner.SpawnablePrefabs[ShipNumber].Cost, coords);
+
+        //turnSystem.OneActionMade();
+
+    }
+
+    void ExecuteTask()
+    {
+        if (nearestEnemy == null)
+            solutionTries = -1;
+
+
+        if (solutionTries <= 0)
+            BuildUnit();
+            // построим юнита и выйдем
+            // или просто выйдем
+
+            // while (turnSystem.actionsCounterForSide>1)
+            //for (int i=0; i< 4; i++)
+        switch (currentTask)
+        {
+            case (AITasks.AttackNearest):
+                {
+                    if (FindTaskForce(nearestEnemy.transform.localPosition))
+                    {
+                        // Нашли кем атаковать!
+                        int attackerNum = Random.Range(0, 4);
+                        //Debug.Log(attackerNum);
+                        //if (attackerNum<=3)
+                        if (!currentTaskForce[attackerNum].hasMoved)
+                            PerformAttack(currentTaskForce[attackerNum]);
+                    }
+                    else
+                    {
+                        BuildUnit();
+                    }
+                } break;
+        }
+        solutionTries--;
+
+    }
+
     void ChoseTask()
     {
         int[] weight = new int[3];
 
         // Если враг близко к нашим силам или маякам - атакуем врага (2)
-        // Если враг далеко, но маяков мало - отбиваем маяки (1)
+        // Если враг далеко, но маяков мало - отбиваем маяки (1) но это переходит в (2) по мере приближения к врагу
         // В противном случае - стоим на месте (0)
 
         weight[0] = 5;
 
-        ShipProperties nearestEnemy = null;
-        float nearestDistance = 9999999;
+        nearestEnemy = null;
+        nearestDistance = 999999;
+
         foreach (ShipProperties shp in enemyShips)
+            if (shp.isAlive==true)
         {
             // Близость к маякам
             foreach (Beacon bc in myBeacons)
@@ -64,20 +169,30 @@ public class AI : MonoBehaviour
                 if (dist < nearestDistance)
                 {
                     nearestDistance = dist;
-                    nearestEnemy = sp;
+                    nearestEnemy = shp;
                 }
             }
         }
 
 
-        weight[1] = Mathf.RoundToInt(enemyDistanceRage / nearestDistance); // обратно пропорционально дистанции
+        weight[2] = Mathf.RoundToInt(enemyDistanceRage / nearestDistance); // обратно пропорционально дистанции
 
-        weight[2] =  10 * (enemyBeacons.Count + 1) / (myBeacons.Count + 1) ;
+        weight[1] =  5 * (enemyBeacons.Count + 1) / (myBeacons.Count + 1) ;
 
 
-        Debug.Log(weight[0]);
-        Debug.Log(weight[1]);
-        Debug.Log(weight[2]);
+      //  Debug.Log(weight[0]);
+      // Debug.Log(weight[1]);
+     //   Debug.Log(weight[2]);
+
+        if ((weight[0] > weight[1]) && (weight[0] > weight[2]))
+            currentTask = AITasks.BuildForces;
+
+        if ((weight[1] > weight[2]) && (weight[1] > weight[0]))
+            currentTask = AITasks.HuntBeacons;
+
+        if ((weight[2] > weight[1]) && (weight[2] > weight[0]))
+            currentTask = AITasks.AttackNearest;
+
         /*
         // Важность каждого из решений
         int[] weight= new int[5];
@@ -142,14 +257,14 @@ public class AI : MonoBehaviour
             //newTaskForce.Add(core);
             float newTaskForcePower = 0;
 
-            Debug.Log("New TaskForce is: " + newTaskForce + " with core " + core.name);
+            //Debug.Log("New TaskForce is: " + newTaskForce + " with core " + core.name);
 
             // Оценим силу новой ударной группы
             foreach (ShipProperties tf in newTaskForce)
                 newTaskForcePower += tf.attack / 
                     (1.0f + Vector3.Distance(core.transform.localPosition, 
                     tf.transform.localPosition));
-            Debug.Log("New TaskForce power by common is " + newTaskForcePower);
+            //Debug.Log("New TaskForce power by common is " + newTaskForcePower);
 
             // Сравним с минимальной силой, чтобы дважды не вставать
             if (newTaskForcePower < TaskForcePowerMinimum)
@@ -158,7 +273,7 @@ public class AI : MonoBehaviour
             // Это мы нашли, насколько группа компактна.
             // А теперь найдём, насколько группа далеко от цели
             newTaskForcePower /= 0.01f * Vector3.Distance(core.transform.localPosition, targetCoords);
-            Debug.Log("New TaskForce power is " + newTaskForcePower);
+            //Debug.Log("New TaskForce power is " + newTaskForcePower);
 
             if (newTaskForcePower > bestTaskForcePower)
             {
@@ -167,14 +282,14 @@ public class AI : MonoBehaviour
             }
         }
 
-        Debug.Log("Best TaskForce is: " + bestTaskForce);
+        //Debug.Log("Best TaskForce is: " + bestTaskForce);
 
         if (bestTaskForcePower > 0.001f)
         {
             currentTaskForce = bestTaskForce.ToArray();
-            Debug.Log("TaskForce is: ");
-            foreach (ShipProperties sp in bestTaskForce)
-                Debug.Log(sp.name);
+            //Debug.Log("TaskForce is: ");
+            //foreach (ShipProperties sp in bestTaskForce)
+           //     Debug.Log(sp.name);
             return true;
         }
         else
@@ -209,6 +324,9 @@ public class AI : MonoBehaviour
     void Start()
     {
         stats = FindObjectOfType<SidesStats>();
+        battlefield = FindObjectOfType<BattleField>();
+        turnSystem = FindObjectOfType<TurnSystem>();
+        Spawner = FindObjectOfType<UnitSpawner>();
     }
 
     public void MakeTurn()
@@ -238,13 +356,36 @@ public class AI : MonoBehaviour
                 enemyBeacons.Add(bc);
         }
 
+        // Пусть AI выберет задачу
         ChoseTask();
+        // И выполнит её, ха-ха!
+        ExecuteTask();
         //FindTaskForce(new Vector2(0, 0));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+//      
+ //           StartCoroutine(StartTurn());
+            //MakeTurn();
+    }
+
+    public void LaunchTurn()
+    {
+        solutionTries = 5;
+        isMyTurn = true;
+        StartCoroutine(StartTurn());
+    }
+
+    IEnumerator StartTurn()
+    {
+        //print(Time.time);
+        while (isMyTurn)
+        { 
+            yield return new WaitForSeconds(0.5f);
+            MakeTurn();
+        }
+        //print(Time.time);
     }
 }

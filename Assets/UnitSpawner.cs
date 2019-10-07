@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitSpawner : MonoBehaviour
 {
     public SidesStats Stats;
-    public GameObject[] SpawnablePrefabs = new GameObject[12];
+    public UnitCard[] SpawnablePrefabs = new UnitCard[12];
     public BattleField CurrentBattleField;
     public GameObject spawnEffect;
     private TurnSystem turnSystem;
@@ -37,6 +37,8 @@ public class UnitSpawner : MonoBehaviour
             spawnEff.transform.localPosition = CurrentBattleField.CalcXYZfromCoords((int)(coords.x), (int)(coords.y));
             Destroy(spawnEff, 3);
             obj.GetComponent<ShipProperties>().hasMoved = true;
+            obj.GetComponent<ShipProperties>().side = side;
+            obj.GetComponentInChildren<MeshRenderer>().material = Stats.sideMaterials[(int)(side)];
             CurrentBattleField.ClampObjectToGrid(obj);
             turnSystem.OneActionMade();
             return true;

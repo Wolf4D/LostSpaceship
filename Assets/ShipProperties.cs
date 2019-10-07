@@ -34,6 +34,7 @@ public class ShipProperties : MonoBehaviour
     public Cannon cannon;
     public float dieTime = 3.0f;
     public GameObject dieEffect;
+    public bool isAlive = true;
 
     private ProgressbarExample lifeMeter;
 
@@ -155,6 +156,7 @@ public class ShipProperties : MonoBehaviour
         lifeMeter.progressPercent = 100.0f * (float)(HP) / (float)(MaxHP);
         if (HP <= 0)
         {
+            isAlive = false;
             command = Commands.Die;
             return true;
         }

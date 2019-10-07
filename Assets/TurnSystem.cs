@@ -38,6 +38,9 @@ public class TurnSystem : MonoBehaviour
 
     public void NextTurn()
     {
+        if (AsuraAI != null)  AsuraAI.isMyTurn = false;
+        if (AsuraAI != null) AsuraAI.isMyTurn = false;
+
         sides.CheckBeacons();
         sides.CollectMoney(currentSide);
 
@@ -67,16 +70,25 @@ public class TurnSystem : MonoBehaviour
         sideLogoBanner[(int)(currentSide) - 1].SetActive(false);
         sideLogoBanner[(int)(currentSide) - 1].SetActive(true);
 
-        if (AsuraAI!=null)
-        if (currentSide == ShipProperties.BattleSides.Asura)
-            AsuraAI.MakeTurn();
-
-        if (HereticAI != null)
-            if (currentSide == ShipProperties.BattleSides.Heretic)
-            HereticAI.MakeTurn();
-
         actionsCounterForSide = 4;
 
+
+        if (AsuraAI!=null)
+        if (currentSide == ShipProperties.BattleSides.Asura)
+            {
+                //AsuraAI.solutionTries += 15;
+                AsuraAI.LaunchTurn(); // isMyTurn = true;
+            }
+
+        
+        if (HereticAI != null)
+            if (currentSide == ShipProperties.BattleSides.Heretic)
+            {
+                //HereticAI.solutionTries += 15;
+                HereticAI.LaunchTurn(); // isMyTurn = true;
+
+            }
+            
     }
 
     // Update is called once per frame
