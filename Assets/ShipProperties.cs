@@ -35,6 +35,8 @@ public class ShipProperties : MonoBehaviour
     public float dieTime = 3.0f;
     public GameObject dieEffect;
 
+    private ProgressbarExample lifeMeter;
+
     public enum Commands
     {
         Stand = 0,
@@ -47,8 +49,8 @@ public class ShipProperties : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {                 
-        
+    {
+        lifeMeter = GetComponentInChildren<ProgressbarExample>();
     }
 
     bool SmoothMove()
@@ -111,6 +113,7 @@ public class ShipProperties : MonoBehaviour
 
             case (Commands.Die):
                 {
+                    lifeMeter.gameObject.SetActive(false);
                     dieTime -= Time.deltaTime;
                     if (!dieEffect.activeSelf)
                     {
@@ -149,6 +152,7 @@ public class ShipProperties : MonoBehaviour
     public bool ReceiveDamage(int damage)
     {
         HP -= damage;
+        lifeMeter.progressPercent = 100.0f * (float)(HP) / (float)(MaxHP);
         if (HP <= 0)
         {
             command = Commands.Die;
