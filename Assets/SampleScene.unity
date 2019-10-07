@@ -526,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.3
+      value: 74.433
       objectReference: {fileID: 0}
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
@@ -3324,7 +3324,7 @@ PrefabInstance:
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.067001
+      value: 91.2
       objectReference: {fileID: 0}
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
@@ -3458,7 +3458,7 @@ PrefabInstance:
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.8
+      value: 86.93298
       objectReference: {fileID: 0}
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
@@ -3701,8 +3701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236f58fcf6a80fa48bac0be1d76a740b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 6
-  y: 6
+  x: 15
+  y: 15
   CellSample: {fileID: 862547180752091662, guid: 43248e30e4eca634fa12243a92028e9e,
     type: 3}
   cellSideSize: 6.1582437
@@ -10015,6 +10015,7 @@ MonoBehaviour:
   - {fileID: 0}
   TaskForceCoreMinimum: 10
   TaskForcePowerMinimum: 50
+  enemyDistanceRage: 10
   currentTask: 4
 --- !u!4 &1144799293
 Transform:
@@ -34005,7 +34006,7 @@ PrefabInstance:
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.067001
+      value: 91.2
       objectReference: {fileID: 0}
     - target: {fileID: 8315714784875783548, guid: 08a809c72a46da84ca3bee47e119da55,
         type: 3}
@@ -39521,6 +39522,7 @@ MonoBehaviour:
   - {fileID: 0}
   TaskForceCoreMinimum: 10
   TaskForcePowerMinimum: 10
+  enemyDistanceRage: 1000
   currentTask: 4
 --- !u!4 &1392519161
 Transform:
@@ -39640,7 +39642,7 @@ PrefabInstance:
     - target: {fileID: 3403074181103427543, guid: 357bd1ed749f22e42b20572c66593c45,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.1
+      value: 111.233
       objectReference: {fileID: 0}
     - target: {fileID: 3403074181103427543, guid: 357bd1ed749f22e42b20572c66593c45,
         type: 3}
@@ -41290,7 +41292,7 @@ PrefabInstance:
     - target: {fileID: 3403074181103427543, guid: 357bd1ed749f22e42b20572c66593c45,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.1
+      value: 111.233
       objectReference: {fileID: 0}
     - target: {fileID: 3403074181103427543, guid: 357bd1ed749f22e42b20572c66593c45,
         type: 3}

@@ -14,17 +14,20 @@ public class AI : MonoBehaviour
     public List<Beacon> enemyBeacons = new List<Beacon>();
 
     public ShipProperties[] currentTaskForce = new ShipProperties[4];
-    public int TaskForceCoreMinimum = 10;
-    public float TaskForcePowerMinimum = 50.0f;
+    public int TaskForceCoreMinimum = 10;     // минимальная сила ядра группы
+    public float TaskForcePowerMinimum = 50.0f; // Только для проверок сплочённости
+
+    public float enemyDistanceRage = 10000.0f;
+
 
 
     public enum AITasks
     {
         BuildForces = 0,
         //HuntBase = 1,
-        HuntBeacons = 2,
+        HuntBeacons = 1,
         //DefendBeacons = 3,
-        AttackNearest = 4
+        AttackNearest = 2
     };
 
     public AITasks currentTask = AITasks.AttackNearest;
@@ -32,11 +35,49 @@ public class AI : MonoBehaviour
     
     void ChoseTask()
     {
-        // Если враг близко - атакуем врага
-        // Если враг далеко, но маяков мало - отбиваем маяки
-        // В противном случае - стоим на месте
+        int[] weight = new int[3];
+
+        // Если враг близко к нашим силам или маякам - атакуем врага (2)
+        // Если враг далеко, но маяков мало - отбиваем маяки (1)
+        // В противном случае - стоим на месте (0)
+
+        weight[0] = 5;
+
+        ShipProperties nearestEnemy = null;
+        float nearestDistance = 9999999;
+        foreach (ShipProperties shp in enemyShips)
+        {
+            // Близость к маякам
+            foreach (Beacon bc in myBeacons)
+            {
+                float dist = Vector3.Distance(shp.transform.localPosition, bc.transform.localPosition);
+                if (dist < nearestDistance)
+                {
+                    nearestDistance = dist;
+                    nearestEnemy = shp;
+                }
+            }
+            // Близость к нашим силам
+            foreach (ShipProperties sp in myShips)
+            {
+                float dist = Vector3.Distance(shp.transform.localPosition, sp.transform.localPosition);
+                if (dist < nearestDistance)
+                {
+                    nearestDistance = dist;
+                    nearestEnemy = sp;
+                }
+            }
+        }
 
 
+        weight[1] = Mathf.RoundToInt(enemyDistanceRage / nearestDistance); // обратно пропорционально дистанции
+
+        weight[2] =  10 * (enemyBeacons.Count + 1) / (myBeacons.Count + 1) ;
+
+
+        Debug.Log(weight[0]);
+        Debug.Log(weight[1]);
+        Debug.Log(weight[2]);
         /*
         // Важность каждого из решений
         int[] weight= new int[5];
@@ -97,7 +138,7 @@ public class AI : MonoBehaviour
         foreach (ShipProperties core in cores)
         {
             // Найдём 3 ближайших к ядру корабля и его самого
-            List<ShipProperties> newTaskForce = Find4NearestShips(myShips, core);
+            List<ShipProperties> newTaskForce = Find4NearestShips(myShips, core.transform.localPosition);
             //newTaskForce.Add(core);
             float newTaskForcePower = 0;
 
@@ -114,7 +155,8 @@ public class AI : MonoBehaviour
             if (newTaskForcePower < TaskForcePowerMinimum)
                 newTaskForcePower = 0;
 
-                // Это мы нашли, насколько группа компактна. А теперь найдём, насколько группа далеко от цели
+            // Это мы нашли, насколько группа компактна.
+            // А теперь найдём, насколько группа далеко от цели
             newTaskForcePower /= 0.01f * Vector3.Distance(core.transform.localPosition, targetCoords);
             Debug.Log("New TaskForce power is " + newTaskForcePower);
 
@@ -141,7 +183,7 @@ public class AI : MonoBehaviour
 
     }
 
-    List<ShipProperties> Find4NearestShips(List<ShipProperties> fromWhat, ShipProperties toWhat)
+    List<ShipProperties> Find4NearestShips(List<ShipProperties> fromWhat, Vector3 toWhat)
     {
         List<ShipProperties> result = new List<ShipProperties>();
         if (fromWhat.Count < 4) return result;
@@ -150,7 +192,7 @@ public class AI : MonoBehaviour
         for (int i = 0; i < fromWhat.Count; i++)
             //if (fromWhat[i]!=toWhat)
                 distances[i] = Mathf.RoundToInt(1000.0f*Vector3.Distance(
-                    fromWhat[i].transform.localPosition, toWhat.transform.localPosition));
+                    fromWhat[i].transform.localPosition, toWhat));
 
         for (int i = 0; i < 4; i++)
         {
@@ -196,8 +238,8 @@ public class AI : MonoBehaviour
                 enemyBeacons.Add(bc);
         }
 
-
-        FindTaskForce(new Vector2(0, 0));
+        ChoseTask();
+        //FindTaskForce(new Vector2(0, 0));
     }
 
     // Update is called once per frame
