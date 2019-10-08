@@ -26,7 +26,7 @@ public class UnitSpawner : MonoBehaviour
         
     }
 
-    public bool SpawnUnit(ShipProperties.BattleSides side, GameObject ship, int cost, Vector2 coords)
+    public bool SpawnUnit(ShipProperties.BattleSides side, GameObject ship, int cost, Vector2 coords, bool useTurn = true)
     {
         if (Stats.GetSomeForMoney(side, cost))
         {
@@ -40,7 +40,8 @@ public class UnitSpawner : MonoBehaviour
             obj.GetComponent<ShipProperties>().side = side;
             obj.GetComponentInChildren<MeshRenderer>().material = Stats.sideMaterials[(int)(side)];
             CurrentBattleField.ClampObjectToGrid(obj);
-            turnSystem.OneActionMade();
+            if (useTurn)
+                turnSystem.OneActionMade();
             return true;
         }
         return false;

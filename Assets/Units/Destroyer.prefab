@@ -28292,17 +28292,18 @@ MonoBehaviour:
   side: 1
   HP: 9
   MaxHP: 9
-  speed: 3
+  speed: 4
   attack: 5
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 3
+  range: 4
   hasMoved: 0
   unitName: Destroyer
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 9025197221768284445}
+  isAlive: 1
   command: 0
 --- !u!1 &7176741400674559187
 GameObject:

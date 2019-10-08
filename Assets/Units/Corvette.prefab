@@ -28292,7 +28292,7 @@ MonoBehaviour:
   side: 1
   HP: 5
   MaxHP: 5
-  speed: 3
+  speed: 5
   attack: 2
   attackCooldown: 0
   attackCooldownLeft: 0
@@ -28303,6 +28303,7 @@ MonoBehaviour:
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 2477504818683517526}
+  isAlive: 1
   command: 0
 --- !u!1 &6227519818994218601
 GameObject:

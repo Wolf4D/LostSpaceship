@@ -28292,17 +28292,18 @@ MonoBehaviour:
   side: 1
   HP: 3
   MaxHP: 3
-  speed: 3
+  speed: 4
   attack: 1
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 4
+  range: 5
   hasMoved: 0
   unitName: Paladin
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 5310324259756843400}
+  isAlive: 1
   command: 0
 --- !u!1 &4091054892183507797
 GameObject:

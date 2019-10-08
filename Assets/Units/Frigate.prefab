@@ -28382,9 +28382,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
   side: 1
-  HP: 4
-  MaxHP: 4
-  speed: 3
+  HP: 5
+  MaxHP: 5
+  speed: 4
   attack: 4
   attackCooldown: 0
   attackCooldownLeft: 0
@@ -28395,6 +28395,7 @@ MonoBehaviour:
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 1732260076589477935}
+  isAlive: 1
   command: 0
 --- !u!1001 &6896287755701594255
 PrefabInstance:

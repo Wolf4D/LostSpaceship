@@ -356,6 +356,9 @@ public class MouseControl : MonoBehaviour
         if (FireZoneDemonstrator != null)
             Destroy(FireZoneDemonstrator);
 
+        Stats.TurnAllBeacons(ShipProperties.BattleSides.Earth, false);
+
+
         SelectedObject = null;
     }
 

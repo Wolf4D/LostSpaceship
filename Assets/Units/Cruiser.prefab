@@ -28292,17 +28292,18 @@ MonoBehaviour:
   side: 1
   HP: 15
   MaxHP: 15
-  speed: 3
+  speed: 4
   attack: 8
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 4
+  range: 3
   hasMoved: 0
   unitName: Cruiser
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 4737607340316335099}
+  isAlive: 1
   command: 0
 --- !u!1 &5322169438636042705
 GameObject:

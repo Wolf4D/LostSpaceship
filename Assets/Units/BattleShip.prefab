@@ -28296,13 +28296,14 @@ MonoBehaviour:
   attack: 9
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 2
+  range: 4
   hasMoved: 0
   unitName: Battleship
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 7505485158595938505}
+  isAlive: 1
   command: 0
 --- !u!1 &6807279134126366912
 GameObject:

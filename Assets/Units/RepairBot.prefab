@@ -28381,19 +28381,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
   side: 1
-  HP: 4
-  MaxHP: 4
-  speed: 3
-  attack: 1
+  HP: 2
+  MaxHP: 2
+  speed: 5
+  attack: 4
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 4
+  range: 1
   hasMoved: 0
-  unitName: Repairer
+  unitName: Reaper
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 0}
+  isAlive: 1
   command: 0
 --- !u!1001 &8664208690851644491
 PrefabInstance:

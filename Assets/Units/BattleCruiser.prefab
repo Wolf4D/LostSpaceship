@@ -28296,13 +28296,14 @@ MonoBehaviour:
   attack: 14
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 5
+  range: 6
   hasMoved: 0
   unitName: BattleCruiser
   abilityCooldownLeft: 0
   cannon: {fileID: 1339167843502337500}
   dieTime: 3
   dieEffect: {fileID: 1372827725386131848}
+  isAlive: 1
   command: 0
 --- !u!1 &7020241431019198426
 GameObject:

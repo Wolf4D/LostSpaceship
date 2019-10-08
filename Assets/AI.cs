@@ -40,6 +40,8 @@ public class AI : MonoBehaviour
 
     bool PerformAttack(ShipProperties ship)
     {
+        if (ship.hasMoved) return false;
+
         Vector2 myPos = battlefield.CalcCoordsFromXYZ(ship.transform.localPosition);
         Vector2 targetPos = battlefield.CalcCoordsFromXYZ(nearestEnemy.transform.localPosition);
 
@@ -176,7 +178,10 @@ public class AI : MonoBehaviour
                     }
                     else
                     {
-                        BuildUnit();
+                        if ((myShips.Count<4) && (myShips.Count >0))
+                            PerformAttack(myShips[0]);
+                        else
+                            BuildUnit();
                     }
                 } break;
 
@@ -192,8 +197,11 @@ public class AI : MonoBehaviour
                             CaptureBeacon(currentTaskForce[attackerNum]);
                     }
                     else
-                    {
-                        BuildUnit();
+                        {
+                            if ((myShips.Count < 4) && (myShips.Count > 0))
+                                CaptureBeacon(myShips[0]);
+                            else
+                                BuildUnit();
                     }
                     }
                 } break;

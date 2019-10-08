@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TurnSystem : MonoBehaviour
 {
-    ShipProperties.BattleSides currentSide = ShipProperties.BattleSides.Earth;
+    public ShipProperties.BattleSides currentSide = ShipProperties.BattleSides.Earth;
     public int actionsCounterForSide = 4;
     public Color disableColor;
     public MouseControl mouse;
@@ -46,6 +46,7 @@ public class TurnSystem : MonoBehaviour
         if (AsuraAI != null) AsuraAI.isMyTurn = false;
 
         sides.CheckBeacons();
+        sides.CheckUnits();
         sides.CollectMoney(currentSide);
 
         ShipProperties[] allShips = FindObjectsOfType<ShipProperties>();
@@ -66,11 +67,11 @@ public class TurnSystem : MonoBehaviour
         }
 
         // Проверка того, есть ли эта сторона на карте
-        //if ((currentSide== ShipProperties.BattleSides.Asura) && (AsuraAI == null))
-        //    currentSide = ShipProperties.BattleSides.Heretic;
+        if ((currentSide== ShipProperties.BattleSides.Asura) && (AsuraAI == null))
+            currentSide = ShipProperties.BattleSides.Heretic;
 
-       // if ((currentSide == ShipProperties.BattleSides.Heretic) && (HereticAI == null))
-        //    currentSide = ShipProperties.BattleSides.Earth;
+        if ((currentSide == ShipProperties.BattleSides.Heretic) && (HereticAI == null))
+            currentSide = ShipProperties.BattleSides.Earth;
 
         for (int i=0; i<4; i++)
             turnIndicators[i].GetComponent<Image>().color = Color.white;

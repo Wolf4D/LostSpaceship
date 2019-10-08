@@ -5,7 +5,7 @@ using UnityEngine;
 public class SidesStats : MonoBehaviour
 {
     public int[] MoneyOfSide = new int[4];
-    //public int[] UnitsOfSide = new int[4];
+    public int[] UnitsOfSide = new int[4];
     public Beacon[] Beacons;
     public int[] BeaconsOfSide = new int[4];
     public int BeaconCost = 100;
@@ -30,6 +30,23 @@ public class SidesStats : MonoBehaviour
         { 
             bc.checkCapture();
             BeaconsOfSide[(int)(bc.currentSide)]++;
+        }
+    }
+
+
+    public void CheckUnits()
+    {
+        UnitsOfSide[0] = 0;
+        UnitsOfSide[1] = 0;
+        UnitsOfSide[2] = 0;
+        UnitsOfSide[3] = 0;
+
+        ShipProperties[] ships = FindObjectsOfType<ShipProperties>();
+
+        foreach (ShipProperties shp in ships)
+        {
+            if (shp.isAlive)
+                UnitsOfSide[(int)(shp.side)]++;
         }
     }
 
