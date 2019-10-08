@@ -28121,7 +28121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339167843502337502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.585, y: -1.322, z: 6.7}
+  m_LocalPosition: {x: 0.1, y: 4.9, z: 5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1339167841758647752}
@@ -28296,7 +28296,7 @@ MonoBehaviour:
   attack: 8
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 2
+  range: 3
   hasMoved: 0
   unitName: Bomber
   abilityCooldownLeft: 0

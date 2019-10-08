@@ -10,6 +10,8 @@ public class TutorialScript : MonoBehaviour
     public GameObject phase1;
     public GameObject phase2;
     public GameObject phase3;
+    public GameObject phase4;
+    public GameObject phase5;
 
     public int phase = 1;
     // Start is called before the first frame update
@@ -27,10 +29,18 @@ public class TutorialScript : MonoBehaviour
             if (turnSystem.currentSide==ShipProperties.BattleSides.Asura)
         {
             phase1.SetActive(true);
-            phase++;
+            phase=4;
             return;
         }
-        if ((stats.UnitsOfSide[2] == 0) && (stats.UnitsOfSide[1] > 1) && (phase == 2))
+
+        if (((turnSystem.turnCount>=4) ) && (stats.UnitsOfSide[1] > 1) && (phase == 4))
+        {
+            phase4.SetActive(true);
+            phase=2;
+            return;
+        }
+
+            if ((stats.UnitsOfSide[2] == 0) && (stats.UnitsOfSide[1] > 1) && (phase == 2))
             if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
             {
                 phase2.SetActive(true);
@@ -42,8 +52,16 @@ public class TutorialScript : MonoBehaviour
            if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
             {
             phase3.SetActive(true);
-            phase++;
+            phase = 5;
             return;
         }
+
+        if ((stats.UnitsOfSide[2] == 0) && (turnSystem.turnCount > 10) && (phase == 5))
+            if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
+            {
+                phase5.SetActive(true);
+                phase = 6;
+                return;
+            }
     }
 }
