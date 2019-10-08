@@ -76,7 +76,7 @@ public class SidesStats : MonoBehaviour
 
     public bool GetSomeForMoney(ShipProperties.BattleSides side, int cost)
     {
-        Debug.Log("MoneyOfSide " + side + " " + MoneyOfSide[(int)(side)]);
+        //Debug.Log("MoneyOfSide " + side + " " + MoneyOfSide[(int)(side)]);
 
         if (MoneyOfSide[(int)(side)] >= cost)
         {

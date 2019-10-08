@@ -3046,7 +3046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163baf88dac600f4188b74ba68170225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoneyOfSide: 88130000d00700008813000088130000
+  MoneyOfSide: 88130000e80300008813000088130000
   UnitsOfSide: 00000000000000000000000000000000
   Beacons: []
   BeaconsOfSide: 00000000000000000000000000000000
@@ -11764,11 +11764,16 @@ MonoBehaviour:
   - {fileID: 3403074181103780855, guid: 4bb94c3fae8c27a45adf7f4726f713ee, type: 3}
   - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
   - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: 4e1e9136366af9a49ae589c486d8337f, type: 3}
   coords:
   - {x: 3, y: 2}
   - {x: 3, y: 1}
   - {x: 4, y: 2}
   - {x: 2, y: 5}
+  - {x: 3, y: 5}
+  - {x: 0, y: 0}
+  - {x: 4, y: 4}
   mySide: 2
 --- !u!1001 &1508413227
 PrefabInstance:

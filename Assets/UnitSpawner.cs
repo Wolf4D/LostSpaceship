@@ -31,7 +31,7 @@ public class UnitSpawner : MonoBehaviour
         if (Stats.GetSomeForMoney(side, cost))
             if (CurrentBattleField.GetObjectAtCoords(coords)==null)
         {
-            Debug.Log("Got money");
+            //Debug.Log("Got money");
             GameObject obj = Instantiate(ship, CurrentBattleField.transform);
             obj.transform.localPosition = CurrentBattleField.CalcXYZfromCoords((int)(coords.x), (int)(coords.y));
             GameObject spawnEff = Instantiate(spawnEffect, CurrentBattleField.transform);

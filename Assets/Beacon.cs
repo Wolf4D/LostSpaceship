@@ -5,7 +5,7 @@ using UnityEngine;
 public class Beacon : MonoBehaviour
 {
     public ShipProperties.BattleSides currentSide = ShipProperties.BattleSides.Neutral;
-    float searchRadius = 5.0f;
+    //float searchRadius = 5.0f;
     public BattleField CurrentBattleField;
     public GameObject SpawnZone;
     public GameObject SpawnZonePrefab;
@@ -24,7 +24,7 @@ public class Beacon : MonoBehaviour
     public void LightBeacon()
     {
         SpawnZone = Instantiate(SpawnZonePrefab);
-        SpawnZone.GetComponent<DrawZone>().radius = 2;
+        SpawnZone.GetComponent<DrawZone>().radius = 3;
         SpawnZone.transform.position = this.transform.position;
         SpawnZone.SetActive(true);
     }

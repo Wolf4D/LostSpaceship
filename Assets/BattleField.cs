@@ -24,10 +24,10 @@ public class BattleField : MonoBehaviour
 
     public void MoveObject(Vector2 from, Vector2 to)
     {
-        if (((int)(to.x) >= x) || ((int)(to.y) >= y))
+        if (((int)(to.x) >= x) || ((int)(to.y) >= y) || ((int)(to.x) <0) || ((int)(to.y) < 0))
             return;
 
-        if (((int)(to.x) <0) || ((int)(to.y) < 0))
+        if (((int)(from.x) >= x) || ((int)(from.y) >= y) || ((int)(from.x) < 0) || ((int)(from.y) < 0))
             return;
 
         GameObject obj = Objects[(int)(from.x), (int)(from.y)];

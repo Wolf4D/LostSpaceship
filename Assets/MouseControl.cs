@@ -205,10 +205,27 @@ public class MouseControl : MonoBehaviour
         Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);
         GameObject toSelect = CurrentBattleField.GetObjectAtCoords(coords);
 
-        Debug.Log("TP " + toSelect);
+        //Debug.Log("TP " + toSelect);
         if (toSelect == null)
         {
-            Debug.Log("SPN " + UnitToSpawnAtMouse);
+            //Debug.Log("SPN " + UnitToSpawnAtMouse);
+
+            bool isOnBeacon = false;
+            foreach (Beacon bc in Stats.Beacons)
+            {
+                if (bc.currentSide == ShipProperties.BattleSides.Earth)
+                {
+                    DrawZone dz = bc.SpawnZone.GetComponent<DrawZone>();
+                    Vector2 beacCoord = dz.CalcCoordsFromXYZ(dz.transform.InverseTransformPoint(
+                        cellUnderMouse.transform.position));
+
+                    if (dz.IsInZone((int)beacCoord.x, (int)beacCoord.y))
+                        isOnBeacon = true;
+                }
+            }
+
+            if (!isOnBeacon)
+                return false;
 
             Spawner.SpawnUnit(ShipProperties.BattleSides.Earth, UnitToSpawnAtMouse, UnitToSpawnCost, coords);
 
