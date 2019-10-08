@@ -24,6 +24,12 @@ public class BattleField : MonoBehaviour
 
     public void MoveObject(Vector2 from, Vector2 to)
     {
+        if (((int)(to.x) >= x) || ((int)(to.y) >= y))
+            return;
+
+        if (((int)(to.x) <0) || ((int)(to.y) < 0))
+            return;
+
         GameObject obj = Objects[(int)(from.x), (int)(from.y)];
         Objects[(int)(to.x), (int)(to.y)] = obj;
         Objects[(int)(from.x), (int)(from.y)] = null;
@@ -59,7 +65,10 @@ public class BattleField : MonoBehaviour
 
     public GameObject GetObjectAtCoords(Vector2 coord)
     {
-        return Objects[(int)(coord.x), (int)(coord.y)];
+        if ((((int)(coord.x) < x) && ((int)(coord.y) < y)) && (((int)(coord.x) >= 0) && ((int)(coord.y) >= 0)))
+            return Objects[(int)(coord.x), (int)(coord.y)];
+        else
+            return null;
     }
 
     public GameObject GetCellAtCoords(Vector2 coord)

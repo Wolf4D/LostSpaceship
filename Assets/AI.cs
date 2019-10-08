@@ -52,13 +52,26 @@ public class AI : MonoBehaviour
 
         if (resultDirection.magnitude > ship.range)
         {
-            resultDirection = resultDirection.normalized * (ship.speed - 1);
+            resultDirection = resultDirection.normalized * (resultDirection.magnitude - ship.range+1); //(Random.Range(1, ship.speed-ship.range));
             Debug.Log(resultDirection);
             Vector2 newPos = myPos + resultDirection;
 
+            if (newPos.x > battlefield.x) newPos.x = battlefield.x - 1;
+            if (newPos.y > battlefield.y) newPos.y = battlefield.y - 1;
+            if (newPos.x < 0) newPos.x = 0;
+            if (newPos.y < 0) newPos.y = 0;
+
             if (battlefield.GetObjectAtCoords(newPos) != null)
-                return false;
-           
+            {
+                newPos = myPos + resultDirection.normalized* Random.Range(1, ship.speed);
+                if (battlefield.GetObjectAtCoords(newPos) != null)
+                                return false;
+            }
+
+            if (newPos.x > battlefield.x) newPos.x = battlefield.x - 1;
+            if (newPos.y > battlefield.y) newPos.y = battlefield.y - 1;
+            if (newPos.x < 0) newPos.x = 0;
+            if (newPos.y < 0) newPos.y = 0;
 
             battlefield.MoveObject(myPos, newPos);
             ship.Move(battlefield.transform.TransformPoint(battlefield.CalcXYZfromCoords((int)(newPos.x), (int)(newPos.y))));
@@ -178,8 +191,8 @@ public class AI : MonoBehaviour
                     }
                     else
                     {
-                        if ((myShips.Count<4) && (myShips.Count >0))
-                            PerformAttack(myShips[0]);
+                        if ((myShips.Count >0) && (myBeacons.Count==0))
+                            PerformAttack(myShips[Random.Range(0, myShips.Count)]);
                         else
                             BuildUnit();
                     }
@@ -198,8 +211,8 @@ public class AI : MonoBehaviour
                     }
                     else
                         {
-                            if ((myShips.Count < 4) && (myShips.Count > 0))
-                                CaptureBeacon(myShips[0]);
+                            if ((myShips.Count > 0) && (myBeacons.Count == 0))
+                                CaptureBeacon(myShips[Random.Range(0, myShips.Count)]);
                             else
                                 BuildUnit();
                     }

@@ -16,6 +16,9 @@ public class TurnSystem : MonoBehaviour
     public GameObject[] turnBeginEffect;
     public GameObject[] sideLogoBanner;
 
+    public bool passTurn = false;
+    public float timeForPassingTurn = -1;
+
     public SidesStats sides;
 
     public AI AsuraAI;
@@ -30,34 +33,40 @@ public class TurnSystem : MonoBehaviour
 
     public void OneActionMade()
     {
-        actionsCounterForSide -= 1;
+        if (actionsCounterForSide > 0)
+            actionsCounterForSide -= 1;
         turnIndicators[actionsCounterForSide].GetComponent<Image>().color = disableColor;
         if (actionsCounterForSide == 0)
         {
-            NextTurn();
+            //StartNextTurn();
+            StartCoroutine(NextTurn());
         }
     }
 
-    public void NextTurn()
+    public void StartNextTurn()
+    {
+        if (currentSide==ShipProperties.BattleSides.Earth)
+                StartCoroutine(NextTurn());
+
+    }
+
+    IEnumerator NextTurn()
     {
         mouse.DropSelections();
 
         if (AsuraAI != null)  AsuraAI.isMyTurn = false;
-        if (AsuraAI != null) AsuraAI.isMyTurn = false;
+        if (HereticAI != null) HereticAI.isMyTurn = false;
 
         sides.CheckBeacons();
         sides.CheckUnits();
         sides.CollectMoney(currentSide);
 
-        ShipProperties[] allShips = FindObjectsOfType<ShipProperties>();
+        if (currentSide!= ShipProperties.BattleSides.Earth)
+            yield return new WaitForSeconds(1.5f);
+        else
+            yield return new WaitForSeconds(0.00001f);
 
-        foreach (ShipProperties shp in allShips)
-        {
-            if (shp.side == currentSide)
-            {
-                shp.hasMoved = false;
-            }
-        }
+        ShipProperties[] allShips = FindObjectsOfType<ShipProperties>();
 
         switch (currentSide)
         {
@@ -72,6 +81,14 @@ public class TurnSystem : MonoBehaviour
 
         if ((currentSide == ShipProperties.BattleSides.Heretic) && (HereticAI == null))
             currentSide = ShipProperties.BattleSides.Earth;
+
+        foreach (ShipProperties shp in allShips)
+        {
+            if (shp.side == currentSide)
+            {
+                shp.hasMoved = false;
+            }
+        }
 
         for (int i=0; i<4; i++)
             turnIndicators[i].GetComponent<Image>().color = Color.white;
@@ -90,6 +107,7 @@ public class TurnSystem : MonoBehaviour
             {
                 //AsuraAI.solutionTries += 15;
                 AsuraAI.LaunchTurn(); // isMyTurn = true;
+                //return;
             }
 
         
@@ -98,7 +116,7 @@ public class TurnSystem : MonoBehaviour
             {
                 //HereticAI.solutionTries += 15;
                 HereticAI.LaunchTurn(); // isMyTurn = true;
-
+                //return;
             }
             
     }

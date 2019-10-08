@@ -58,6 +58,8 @@ public class MouseControl : MonoBehaviour
     {
         ProbeBattleFieldsForHover();
 
+        if (turnSystem.currentSide != ShipProperties.BattleSides.Earth) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             switch (currentMouseMode)
@@ -90,6 +92,7 @@ public class MouseControl : MonoBehaviour
         // Узнаем, можем ли мы ещё действовать? Нет - сразу не команда
         ShipProperties ship = SelectedObject.GetComponent<ShipProperties>();
         if (ship.hasMoved) return false;
+        if (ship.side != ShipProperties.BattleSides.Earth) return false;
 
         // Есть ли враг?
         Vector2 coords = CurrentBattleField.CalcCoordsFromXYZ(cellUnderMouse.transform.localPosition);

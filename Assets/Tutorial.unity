@@ -614,7 +614,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 88.97, y: 0}
+  m_AnchoredPosition: {x: 88.9707, y: 0}
   m_SizeDelta: {x: 513.4, y: 1122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &173933234
@@ -5791,7 +5791,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1533413573}
-        m_MethodName: NextTurn
+        m_MethodName: StartNextTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12053,6 +12053,8 @@ MonoBehaviour:
   - {fileID: 291590310}
   - {fileID: 342466597}
   - {fileID: 1682058570}
+  passTurn: 0
+  timeForPassingTurn: -1
   sides: {fileID: 0}
   AsuraAI: {fileID: 1392519160}
   HereticAI: {fileID: 0}
@@ -13586,7 +13588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -31.159912, y: 0}
+  m_AnchoredPosition: {x: -31.160156, y: 0}
   m_SizeDelta: {x: 3840, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787497305
