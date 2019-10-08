@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 111888277}
   - component: {fileID: 111888276}
+  - component: {fileID: 111888278}
   m_Layer: 0
   m_Name: Phase1Logic
   m_TagString: Untagged
@@ -422,6 +423,23 @@ Transform:
   m_Father: {fileID: 1251812140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &111888278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111888275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e432c5817492b54694b50c053930db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToSpawn:
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  coords:
+  - {x: 5, y: 0}
+  mySide: 2
 --- !u!1 &141752851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1791,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateToo: {fileID: 173933232}
+--- !u!1 &482510401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482510403}
+  - component: {fileID: 482510402}
+  m_Layer: 0
+  m_Name: Phase2Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &482510402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482510401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e432c5817492b54694b50c053930db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToSpawn:
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  coords:
+  - {x: 4, y: 1}
+  - {x: 5, y: 2}
+  - {x: 4, y: 2}
+  - {x: 3, y: 0}
+  mySide: 2
+--- !u!4 &482510403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482510401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1251812140}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &492722608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6415,6 +6487,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 111888277}
+  - {fileID: 482510403}
+  - {fileID: 1506570259}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6431,6 +6505,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase1: {fileID: 111888275}
+  phase2: {fileID: 482510401}
+  phase3: {fileID: 1506570258}
   phase: 1
 --- !u!1 &1260692766
 GameObject:
@@ -11639,6 +11715,61 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1506570258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1506570259}
+  - component: {fileID: 1506570260}
+  m_Layer: 0
+  m_Name: Phase3Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1506570259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506570258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1251812140}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1506570260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506570258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e432c5817492b54694b50c053930db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToSpawn:
+  - {fileID: 3403074181103780855, guid: 4e1e9136366af9a49ae589c486d8337f, type: 3}
+  - {fileID: 3403074181103780855, guid: 4bb94c3fae8c27a45adf7f4726f713ee, type: 3}
+  - {fileID: 3403074181103780855, guid: 4bb94c3fae8c27a45adf7f4726f713ee, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  - {fileID: 3403074181103780855, guid: be2d119a836db724e936ceb49f80da4b, type: 3}
+  coords:
+  - {x: 3, y: 2}
+  - {x: 3, y: 1}
+  - {x: 4, y: 2}
+  - {x: 2, y: 5}
+  mySide: 2
 --- !u!1001 &1508413227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12055,6 +12186,7 @@ MonoBehaviour:
   - {fileID: 1682058570}
   passTurn: 0
   timeForPassingTurn: -1
+  turnCount: 0
   sides: {fileID: 0}
   AsuraAI: {fileID: 1392519160}
   HereticAI: {fileID: 0}

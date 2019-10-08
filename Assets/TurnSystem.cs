@@ -18,7 +18,7 @@ public class TurnSystem : MonoBehaviour
 
     public bool passTurn = false;
     public float timeForPassingTurn = -1;
-
+    public int turnCount=0;
     public SidesStats sides;
 
     public AI AsuraAI;
@@ -100,7 +100,7 @@ public class TurnSystem : MonoBehaviour
         sideLogoBanner[(int)(currentSide) - 1].SetActive(true);
 
         actionsCounterForSide = 4;
-
+        turnCount++;
 
         if (AsuraAI!=null)
         if (currentSide == ShipProperties.BattleSides.Asura)

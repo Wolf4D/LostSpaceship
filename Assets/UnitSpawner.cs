@@ -29,6 +29,7 @@ public class UnitSpawner : MonoBehaviour
     public bool SpawnUnit(ShipProperties.BattleSides side, GameObject ship, int cost, Vector2 coords, bool useTurn = true)
     {
         if (Stats.GetSomeForMoney(side, cost))
+            if (CurrentBattleField.GetObjectAtCoords(coords)==null)
         {
             Debug.Log("Got money");
             GameObject obj = Instantiate(ship, CurrentBattleField.transform);

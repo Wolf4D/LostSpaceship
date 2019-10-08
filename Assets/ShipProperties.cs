@@ -134,6 +134,7 @@ public class ShipProperties : MonoBehaviour
 
     public void Move(Vector3 ctarget)
     {
+        if (!isAlive) return;
         target = new Vector3(ctarget.x, this.transform.position.y, ctarget.z);
         command = Commands.Move;
         hasMoved = true;
@@ -141,6 +142,7 @@ public class ShipProperties : MonoBehaviour
 
     public void Attack(ShipProperties ctarget)
     {
+        if (!isAlive) return;
         target = new Vector3(ctarget.transform.position.x, this.transform.position.y, ctarget.transform.position.z);
         // Все настройки пушки - тут
         cannon.target = ctarget;

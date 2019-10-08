@@ -8,6 +8,9 @@ public class TutorialScript : MonoBehaviour
     UnitSpawner spawner;
     TurnSystem turnSystem;
     public GameObject phase1;
+    public GameObject phase2;
+    public GameObject phase3;
+
     public int phase = 1;
     // Start is called before the first frame update
     void Start()
@@ -23,8 +26,6 @@ public class TutorialScript : MonoBehaviour
         if ((stats.BeaconsOfSide[1] == 1) && (phase==1))
             if (turnSystem.currentSide==ShipProperties.BattleSides.Asura)
         {
-            spawner.SpawnUnit(ShipProperties.BattleSides.Asura, 
-                spawner.SpawnablePrefabs[11].ShipToBuy, 0, new Vector2(5, 0));
             phase1.SetActive(true);
             phase++;
             return;
@@ -32,18 +33,15 @@ public class TutorialScript : MonoBehaviour
         if ((stats.UnitsOfSide[2] == 0) && (stats.UnitsOfSide[1] > 1) && (phase == 2))
             if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
             {
-            spawner.SpawnUnit(ShipProperties.BattleSides.Asura,
-                spawner.SpawnablePrefabs[11].ShipToBuy, 0, new Vector2(5, 0), false);
+                phase2.SetActive(true);
+            phase++;
+            return;
+        }
 
-            spawner.SpawnUnit(ShipProperties.BattleSides.Asura,
-                spawner.SpawnablePrefabs[11].ShipToBuy, 0, new Vector2(5, 2), false);
-
-            spawner.SpawnUnit(ShipProperties.BattleSides.Asura,
-               spawner.SpawnablePrefabs[11].ShipToBuy, 0, new Vector2(3, 2), false);
-
-            spawner.SpawnUnit(ShipProperties.BattleSides.Asura,
-               spawner.SpawnablePrefabs[11].ShipToBuy, 0, new Vector2(3, 0), false);
-            //phase1.SetActive(true);
+        if ((stats.UnitsOfSide[2] <= 2) && (turnSystem.turnCount>7) && (phase == 3))
+           if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
+            {
+            phase3.SetActive(true);
             phase++;
             return;
         }
