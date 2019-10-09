@@ -27,6 +27,8 @@ public class AI : MonoBehaviour
     public float nearestDistance = 9999999;
     public int solutionTries = 5;
 
+    public int maxTechLevel = 12;
+
     public bool isMyTurn = false;
 
     public enum AITasks
@@ -152,14 +154,39 @@ public class AI : MonoBehaviour
             return;
         }
 
+        // Добавим немного случайности
+        int someRandomness = Random.Range(0, 11);
+        if (someRandomness > 7)
+            nearestBeacon = myBeacons[Random.Range(0, myBeacons.Count)];
 
-        int ShipNumber = Random.Range(0, 13);
+        int ShipNumber = Random.Range(maxTechLevel, 12);
+
+        stats.TurnAllBeacons(ShipProperties.BattleSides.Asura, true);
 
         Vector2 coords = battlefield.CalcCoordsFromXYZ(nearestBeacon.transform.localPosition);
         if (battlefield.GetObjectAtCoords(coords) == null)
+        {
             Spawner.SpawnUnit(mySide, Spawner.SpawnablePrefabs[ShipNumber].ShipToBuy,
                 Spawner.SpawnablePrefabs[ShipNumber].Cost, coords);
+        }
+        else {
+            // Поищем случайные координаты
+            coords = new Vector2(coords.x + Random.Range(-2, 2), coords.y + Random.Range(-2, 2));
+            if (coords.x < 0) coords.x = 0;
+            if (coords.x >= battlefield.x) coords.x = battlefield.x-1;
 
+            if (coords.y < 0) coords.y = 0;
+            if (coords.y >= battlefield.y) coords.y = battlefield.y - 1;
+
+            if (battlefield.GetObjectAtCoords(coords) == null)
+                Spawner.SpawnUnit(mySide, Spawner.SpawnablePrefabs[ShipNumber].ShipToBuy,
+                Spawner.SpawnablePrefabs[ShipNumber].Cost, coords);
+            else
+                turnSystem.OneActionMade();
+
+        }
+
+        stats.TurnAllBeacons(ShipProperties.BattleSides.Asura, false);
         //turnSystem.OneActionMade();
 
     }

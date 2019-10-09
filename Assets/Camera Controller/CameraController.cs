@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     public bool useDefaultSettings;
     [Range(8, 128)]
     public float cameraSpeed;
-    [Range(.8f, 60.2f)]
+    [Range(.8f, 260.2f)]
     public float cameraBorder;
 
     // Minimun and maxium distance from the detected ground the Camera can be
@@ -48,6 +48,8 @@ public class CameraController : MonoBehaviour
     private Vector2 _leftMouseFinal;
     private Vector3 _middleMouseInitial;
 
+    public bool disable = false;
+
     void Start()
     {
         CheckSettings();
@@ -55,7 +57,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Controller();
+        if (Input.GetKeyDown(KeyCode.LeftAlt)) disable = !disable;
+        if (!disable)
+            Controller();
     }
 
     void CheckSettings()
