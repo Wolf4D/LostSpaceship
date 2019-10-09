@@ -45,8 +45,9 @@ public class AI : MonoBehaviour
     {
         if (ship.hasMoved) return false;
 
+        ShipProperties target = FindNearestEnemy(ship);
         Vector2 myPos = battlefield.CalcCoordsFromXYZ(ship.transform.localPosition);
-        Vector2 targetPos = battlefield.CalcCoordsFromXYZ(nearestEnemy.transform.localPosition);
+        Vector2 targetPos = battlefield.CalcCoordsFromXYZ(target.transform.localPosition);
 
         Vector2 resultDirection = targetPos - myPos;
 
@@ -249,6 +250,25 @@ public class AI : MonoBehaviour
         }
         solutionTries--;
 
+    }
+
+    ShipProperties FindNearestEnemy(ShipProperties toWho)
+    {
+        ShipProperties nearest = null;
+        float nearDist = 999999;
+
+        foreach (ShipProperties sp in enemyShips)
+            if (sp.isAlive)
+        {
+            float dist = Vector3.Distance(toWho.transform.localPosition, sp.transform.localPosition);
+            if (dist < nearDist)
+            {
+                nearDist = dist;
+                nearest = sp;
+            }
+        }
+
+        return nearest;
     }
 
     void ChoseTask()
@@ -504,6 +524,8 @@ public class AI : MonoBehaviour
             else
                 turnSystem.OneActionMade();
         }
+
+        yield return new WaitForSeconds(0.5f);
         //print(Time.time);
     }
 }

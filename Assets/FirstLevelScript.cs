@@ -25,7 +25,7 @@ public class FirstLevelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((stats.BeaconsOfSide[1] >= 1) && (phase == 1) && (turnSystem.turnCount>=6))
+        if ((stats.BeaconsOfSide[1] >= 1) && (phase == 1) && (turnSystem.turnCount>=8))
             if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
             {
                 phase1.GetComponent<AI>().isBrainActive = true;

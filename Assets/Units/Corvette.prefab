@@ -28290,8 +28290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
   side: 1
-  HP: 5
-  MaxHP: 5
+  HP: 4
+  MaxHP: 4
   speed: 5
   attack: 2
   attackCooldown: 0

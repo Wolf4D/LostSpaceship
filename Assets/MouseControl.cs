@@ -62,6 +62,7 @@ public class MouseControl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            turnSystem.wasAnyPlayersMove = true;
             switch (currentMouseMode)
             {
                 case (MouseModes.SelectShip): { TrySelect(); } ; break;
@@ -105,6 +106,7 @@ public class MouseControl : MonoBehaviour
 
             ShipProperties targetShip = target.GetComponent<ShipProperties>();
             if (ship.side == targetShip.side) return false;
+            if (!targetShip.isAlive) return false;
 
             // Проверим, может ли корабль выстрелить?
             Vector2 coordsInMoveZone = FireZoneDemonstrator.GetComponent<DrawZone>().
@@ -215,7 +217,9 @@ public class MouseControl : MonoBehaviour
             {
                 if (bc.currentSide == ShipProperties.BattleSides.Earth)
                 {
+                    if (bc.SpawnZone == null) return false;
                     DrawZone dz = bc.SpawnZone.GetComponent<DrawZone>();
+                    
                     Vector2 beacCoord = dz.CalcCoordsFromXYZ(dz.transform.InverseTransformPoint(
                         cellUnderMouse.transform.position));
 

@@ -41,6 +41,7 @@ public class BattleField : MonoBehaviour
         if (obj.GetComponent<ShipProperties>())
         {
             (obj.GetComponent<ShipProperties>()).battleField = this;
+            obj.transform.localPosition = CalcXYZfromCoords((int)(coord.x), (int)(coord.y));
             Objects[(int)(coord.x), (int)(coord.y)] = obj;
         }
     }

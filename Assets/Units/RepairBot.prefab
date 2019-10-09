@@ -28385,7 +28385,7 @@ MonoBehaviour:
   HP: 2
   MaxHP: 2
   speed: 5
-  attack: 4
+  attack: 5
   attackCooldown: 0
   attackCooldownLeft: 0
   range: 1

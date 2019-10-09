@@ -22,9 +22,12 @@ public class TurnSystem : MonoBehaviour
     public SidesStats sides;
 
     public bool catchUp = false;
+    public bool wasAnyPlayersMove = false; // делал ли плеер что-либо с последнего хода?
 
     public AI AsuraAI;
     public AI HereticAI;
+
+    bool DeadlockGuardIsRunning = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +87,9 @@ public class TurnSystem : MonoBehaviour
         if ((currentSide == ShipProperties.BattleSides.Heretic) && (HereticAI == null))
             currentSide = ShipProperties.BattleSides.Earth;
 
+        if (currentSide==ShipProperties.BattleSides.Earth)
+            wasAnyPlayersMove = false;
+
         foreach (ShipProperties shp in allShips)
         {
             if (shp.side == currentSide)
@@ -108,11 +114,16 @@ public class TurnSystem : MonoBehaviour
         actionsCounterForSide = 4;
         turnCount++;
 
+        StartCoroutine(DeadlockGuard());
+
         if (AsuraAI!=null)
         if (currentSide == ShipProperties.BattleSides.Asura)
             {
                 //AsuraAI.solutionTries += 15;
-                AsuraAI.LaunchTurn(); // isMyTurn = true;
+                if (wasAnyPlayersMove)
+                    AsuraAI.LaunchTurn(); // isMyTurn = true;
+                else
+                    StartNextTurn();
                 //return;
             }
 
@@ -121,15 +132,54 @@ public class TurnSystem : MonoBehaviour
             if (currentSide == ShipProperties.BattleSides.Heretic)
             {
                 //HereticAI.solutionTries += 15;
-                HereticAI.LaunchTurn(); // isMyTurn = true;
+                if (wasAnyPlayersMove)
+                    HereticAI.LaunchTurn(); // isMyTurn = true;
+                else
+                    StartNextTurn();
+
                 //return;
             }
-            
+
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator DeadlockGuard()
     {
-        
+        DeadlockGuardIsRunning = true;
+        yield return new WaitForSeconds(5.5f);
+        if (actionsCounterForSide == 4)
+        switch (currentSide)
+        {
+            case (ShipProperties.BattleSides.Asura):
+                    {
+                        if (AsuraAI != null)
+                            if (AsuraAI.isMyTurn == false)
+                            {
+                                currentSide = ShipProperties.BattleSides.Earth;
+                                //AsuraAI.LaunchTurn(); //isMyTurn = true;
+                                //OneActionMade(); // NextTurn();
+                                                 //StartNextTurn();
+                            }
+                    } break;
+            case (ShipProperties.BattleSides.Heretic):
+                    {
+                        if (HereticAI != null)
+                            if (HereticAI.isMyTurn == false)
+                                currentSide = ShipProperties.BattleSides.Earth;
+                        //OneActionMade();
+                        //NextTurn();
+                        //HereticAI.LaunchTurn();//isMyTurn = true;
+                        //StartNextTurn();
+                    } break;
+        }
+
+        DeadlockGuardIsRunning = false;
+    }
+
+        // Update is called once per frame
+        void Update()
+    {
+        if ((DeadlockGuardIsRunning == false) && (currentSide != ShipProperties.BattleSides.Earth))
+            StartCoroutine(DeadlockGuard());
+
     }
 }
