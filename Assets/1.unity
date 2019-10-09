@@ -1339,6 +1339,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241896609}
   m_CullTransparentMesh: 0
+--- !u!1001 &276851500
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 746350363}
+    m_Modifications:
+    - target: {fileID: 3714926963085942796, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_Name
+      value: Beacon (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 198
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 74.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
+--- !u!4 &276851501 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 276851500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &287509734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1686,7 @@ PrefabInstance:
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 162.4
+      value: 139.2
       objectReference: {fileID: 0}
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
@@ -3374,11 +3449,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163baf88dac600f4188b74ba68170225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoneyOfSide: 88130000e80300008813000088130000
+  MoneyOfSide: 00000000d00700000000000000000000
   UnitsOfSide: 00000000000000000000000000000000
   Beacons: []
   BeaconsOfSide: 00000000000000000000000000000000
-  BeaconCost: 250
+  BeaconCost: 100
   sideMaterials:
   - {fileID: 2100000, guid: 182faf5ec5a87bb4ba198856e559ab2c, type: 2}
   - {fileID: 2100000, guid: 998c03065b0bf794bb485c06b76d6894, type: 2}
@@ -4354,6 +4429,7 @@ Transform:
   - {fileID: 936762973}
   - {fileID: 1558701241}
   - {fileID: 930063330}
+  - {fileID: 276851501}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -4913,7 +4989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipToBuy: {fileID: 3403074181103780855, guid: 4e1e9136366af9a49ae589c486d8337f,
     type: 3}
-  Cost: 700
+  Cost: 600
   UnitSprite: {fileID: 21300000, guid: 6e43eb082b34ac648a9135f3b907b39c, type: 3}
   UnitName: {fileID: 767971910}
   UnitCost: {fileID: 767971909}
@@ -6567,6 +6643,7 @@ MonoBehaviour:
   solutionTries: 15
   maxTechLevel: 12
   isMyTurn: 0
+  isBrainActive: 1
   currentTask: 4
 --- !u!4 &1144799293
 Transform:
@@ -7460,6 +7537,7 @@ GameObject:
   - component: {fileID: 1251812139}
   - component: {fileID: 1251812138}
   - component: {fileID: 1251812141}
+  - component: {fileID: 1251812142}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -7539,6 +7617,24 @@ MonoBehaviour:
   phase4: {fileID: 1059841930}
   phase5: {fileID: 908726592}
   phase: 1
+--- !u!114 &1251812142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251812137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3616065a835ad814ebd07c002dc6e08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phase: 1
+  phase1: {fileID: 1392519159}
+  phase2: {fileID: 0}
+  phase3: {fileID: 0}
+  phase4: {fileID: 0}
+  phase5: {fileID: 0}
 --- !u!1 &1260692766
 GameObject:
   m_ObjectHideFlags: 0
@@ -17472,15 +17568,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  TaskForceCoreMinimum: 10
-  TaskForcePowerMinimum: 10
+  TaskForceCoreMinimum: 2
+  TaskForcePowerMinimum: 3
   Spawner: {fileID: 0}
   enemyDistanceRage: 1000
   nearestEnemy: {fileID: 0}
   nearestDistance: 9999999
   solutionTries: 5
-  maxTechLevel: 5
+  maxTechLevel: 6
   isMyTurn: 0
+  isBrainActive: 0
   currentTask: 0
 --- !u!4 &1392519161
 Transform:
@@ -18311,6 +18408,7 @@ MonoBehaviour:
   timeForPassingTurn: -1
   turnCount: 0
   sides: {fileID: 0}
+  catchUp: 1
   AsuraAI: {fileID: 1392519160}
   HereticAI: {fileID: 0}
 --- !u!1001 &1539184215
@@ -19573,6 +19671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RingOfFireSparks (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 311080070590807403, guid: 8471889f52b6a734a8f8a870e0450fcd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 311080070590503675, guid: 8471889f52b6a734a8f8a870e0450fcd,
         type: 3}
@@ -21045,7 +21148,7 @@ PrefabInstance:
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 137.7
+      value: 88.3
       objectReference: {fileID: 0}
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
@@ -21055,7 +21158,7 @@ PrefabInstance:
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 134.5
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 3714926963086179372, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
@@ -21100,13 +21203,13 @@ PrefabInstance:
     - target: {fileID: 6016816475545155433, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: currentSide
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3714926963087949516, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 82be87e82a9cb434699f3bcd47413ca0, type: 2}
+      objectReference: {fileID: 2100000, guid: 182faf5ec5a87bb4ba198856e559ab2c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
 --- !u!4 &1921480794 stripped

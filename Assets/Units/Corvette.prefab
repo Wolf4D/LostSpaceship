@@ -28296,7 +28296,7 @@ MonoBehaviour:
   attack: 2
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 4
+  range: 5
   hasMoved: 0
   unitName: Corvette
   abilityCooldownLeft: 0

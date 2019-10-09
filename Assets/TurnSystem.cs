@@ -21,6 +21,8 @@ public class TurnSystem : MonoBehaviour
     public int turnCount=0;
     public SidesStats sides;
 
+    public bool catchUp = false;
+
     public AI AsuraAI;
     public AI HereticAI;
 
@@ -90,7 +92,11 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-        for (int i=0; i<4; i++)
+        if (catchUp)
+            if (sides.MoneyOfSide[(int)(currentSide)] > sides.MoneyOfSide[(int)(ShipProperties.BattleSides.Earth)])
+                sides.MoneyOfSide[(int)(currentSide)] = sides.MoneyOfSide[(int)(ShipProperties.BattleSides.Earth)];
+
+                    for (int i=0; i<4; i++)
             turnIndicators[i].GetComponent<Image>().color = Color.white;
 
         turnBeginEffect[(int)(currentSide)-1].SetActive(false);

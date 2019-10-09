@@ -27,9 +27,10 @@ public class AI : MonoBehaviour
     public float nearestDistance = 9999999;
     public int solutionTries = 5;
 
-    public int maxTechLevel = 12;
+    public int maxTechLevel = 0;
 
     public bool isMyTurn = false;
+    public bool isBrainActive = true;
 
     public enum AITasks
     {
@@ -498,7 +499,10 @@ public class AI : MonoBehaviour
         while (isMyTurn)
         { 
             yield return new WaitForSeconds(0.5f);
-            MakeTurn();
+            if (isBrainActive)
+                MakeTurn();
+            else
+                turnSystem.OneActionMade();
         }
         //print(Time.time);
     }
