@@ -28396,6 +28396,7 @@ MonoBehaviour:
   dieTime: 3
   dieEffect: {fileID: 455864517527381744}
   isAlive: 1
+  cost: 600
   command: 0
 --- !u!1001 &8027378578474600310
 PrefabInstance:

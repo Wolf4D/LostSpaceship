@@ -36,6 +36,8 @@ public class ShipProperties : MonoBehaviour
     public GameObject dieEffect;
     public bool isAlive = true;
 
+    public int cost = 100;
+
     private ProgressbarExample lifeMeter;
 
     public enum Commands

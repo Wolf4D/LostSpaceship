@@ -14,6 +14,10 @@ public class FirstLevelScript : MonoBehaviour
     public GameObject phase4;
     public GameObject phase5;
 
+    public GameObject playersBase;
+    public GameObject lose;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +36,20 @@ public class FirstLevelScript : MonoBehaviour
                 phase = 2;
                 return;
             }
+
+        if ((stats.BeaconsOfSide[2] == 0) && (phase == 2) && (turnSystem.turnCount >= 8))
+            //if (turnSystem.currentSide == ShipProperties.BattleSides.Asura)
+            {
+            phase2.SetActive(true);
+                phase = 3;
+                return;
+            }
+
+        if (playersBase == null)
+        {
+            lose.SetActive(true);
+            phase = -1;
+        }
+
     }
 }

@@ -28296,7 +28296,7 @@ MonoBehaviour:
   attack: 2
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 5
+  range: 6
   hasMoved: 0
   unitName: Striker
   abilityCooldownLeft: 0
@@ -28304,6 +28304,7 @@ MonoBehaviour:
   dieTime: 3
   dieEffect: {fileID: 640861222827725997}
   isAlive: 1
+  cost: 400
   command: 0
 --- !u!1 &8224197031708671125
 GameObject:

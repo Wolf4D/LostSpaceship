@@ -28388,7 +28388,7 @@ MonoBehaviour:
   attack: 1
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 2
+  range: 3
   hasMoved: 0
   unitName: Fighter
   abilityCooldownLeft: 0
@@ -28396,6 +28396,7 @@ MonoBehaviour:
   dieTime: 3
   dieEffect: {fileID: 8391049349879714813}
   isAlive: 1
+  cost: 100
   command: 0
 --- !u!1001 &2109807754095489659
 PrefabInstance:

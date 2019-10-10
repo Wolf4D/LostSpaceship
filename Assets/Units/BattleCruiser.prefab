@@ -28304,6 +28304,7 @@ MonoBehaviour:
   dieTime: 3
   dieEffect: {fileID: 1372827725386131848}
   isAlive: 1
+  cost: 2750
   command: 0
 --- !u!1 &7020241431019198426
 GameObject:

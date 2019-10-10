@@ -84,7 +84,7 @@ public class AI : MonoBehaviour
         }
         else
         {
-            ship.Attack(nearestEnemy);
+            ship.Attack(target);
             turnSystem.OneActionMade();
             return true;
         }

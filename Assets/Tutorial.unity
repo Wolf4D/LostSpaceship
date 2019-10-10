@@ -3070,6 +3070,7 @@ MonoBehaviour:
   cameraMinHeight: 74
   cameraMaxHeight: 74
   mapSize: 200
+  disable: 0
 --- !u!114 &534669910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3112,7 +3113,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.335
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5849,7 +5850,9 @@ MonoBehaviour:
   nearestEnemy: {fileID: 0}
   nearestDistance: 9999999
   solutionTries: 15
+  maxTechLevel: 0
   isMyTurn: 0
+  isBrainActive: 1
   currentTask: 4
 --- !u!4 &1144799293
 Transform:
@@ -7058,7 +7061,7 @@ PrefabInstance:
       propertyPath: m_Text
       value: "To attack your enemy, select your ship with left mouse click.\nThen
         click your enemy, if it's ship is within range (marked with red dots). \n\nYour
-        ship can't do move and shoot at one turn!\nEach ships has it's own advantage
+        ship can't do move and shoot at one turn!\nEach ship has its own advantage
         - fighter is hit-and-run disposable, bomber deals huge damage, striker can
         attack from a far, and paladin has a good durability. Try them yourself!"
       objectReference: {fileID: 0}
@@ -12138,7 +12141,9 @@ MonoBehaviour:
   nearestEnemy: {fileID: 0}
   nearestDistance: 9999999
   solutionTries: 15
+  maxTechLevel: 0
   isMyTurn: 0
+  isBrainActive: 1
   currentTask: 0
 --- !u!4 &1392519161
 Transform:
@@ -12969,6 +12974,8 @@ MonoBehaviour:
   timeForPassingTurn: -1
   turnCount: 0
   sides: {fileID: 0}
+  catchUp: 0
+  wasAnyPlayersMove: 0
   AsuraAI: {fileID: 1392519160}
   HereticAI: {fileID: 0}
 --- !u!1001 &1539184215

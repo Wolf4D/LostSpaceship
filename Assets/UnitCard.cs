@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UnitCard : MonoBehaviour
 {
     public GameObject ShipToBuy;
+    [HideInInspector]
     public int Cost;
     public Sprite UnitSprite;
     public Text UnitName;
@@ -16,6 +17,7 @@ public class UnitCard : MonoBehaviour
     void Start()
     {
         ShipProperties ship = ShipToBuy.GetComponent<ShipProperties>();
+        Cost = ship.cost;
         //Text UnitName = GetComponentsInChildren<Text>()[1];
         //Text UnitCost = GetComponentsInChildren<Text>()[2];
         //Image Picture = GetComponentInChildren<Image>();

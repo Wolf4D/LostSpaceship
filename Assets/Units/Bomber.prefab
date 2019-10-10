@@ -28292,7 +28292,7 @@ MonoBehaviour:
   side: 1
   HP: 1
   MaxHP: 1
-  speed: 3
+  speed: 4
   attack: 8
   attackCooldown: 0
   attackCooldownLeft: 0
@@ -28304,6 +28304,7 @@ MonoBehaviour:
   dieTime: 3
   dieEffect: {fileID: 7154258952320100669}
   isAlive: 1
+  cost: 500
   command: 0
 --- !u!1 &4287467153972061941
 GameObject:
