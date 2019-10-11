@@ -37,6 +37,9 @@ public class CameraController : MonoBehaviour
     [Range(.8f, 320f)]
     public float cameraMaxHeight;
 
+    public bool separateAxes = false;
+    public float separateZSize = 0;
+
     // Map properties
     public float mapSize;
 
@@ -145,7 +148,10 @@ public class CameraController : MonoBehaviour
         // Don't allow the camera to leave the ground area
         position.x = Mathf.Clamp(position.x, 0 - (mapSize / 2), 0 + (mapSize / 2));
         position.y = Mathf.Clamp(position.y, _rayHit.point.y + cameraMinHeight, _rayHit.point.y + cameraMaxHeight);
-        position.z = Mathf.Clamp(position.z, 0 - (mapSize / 2), 0 + (mapSize / 2));
+        if (!separateAxes)
+            position.z = Mathf.Clamp(position.z, 0 - (mapSize / 2), 0 + (mapSize / 2));
+        else
+            position.z = Mathf.Clamp(position.z, 0 - (separateZSize / 2), 0 + (separateZSize / 2));
 
         // Effects when camera hit the ground or the top surface
         //if (position.y <= _rayHit.point.y + cameraMinHeight + 1)
