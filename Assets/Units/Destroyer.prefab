@@ -28121,7 +28121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339167843502337502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.585, y: -1.322, z: 6.7}
+  m_LocalPosition: {x: 0, y: 0.8, z: 6.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1339167841758647752}
@@ -28290,13 +28290,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
   side: 1
-  HP: 15
-  MaxHP: 15
+  HP: 9
+  MaxHP: 9
   speed: 4
-  attack: 8
+  attack: 4
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 3
+  range: 4
   hasMoved: 0
   unitName: Destroyer
   abilityCooldownLeft: 0
@@ -28333,7 +28333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5322169438636042705}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 1.022438, y: -24.2, z: 59.8}
+  m_LocalPosition: {x: 0, y: -18.07, z: 56.32}
   m_LocalScale: {x: 74.73194, y: 68.688805, z: 43.410625}
   m_Children: []
   m_Father: {fileID: 3403074181103427543}

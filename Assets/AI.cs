@@ -209,6 +209,7 @@ public class AI : MonoBehaviour
         {
             case (AITasks.AttackNearest):
                 {
+                    if (nearestEnemy == null) return;
                     if (FindTaskForce(nearestEnemy.transform.localPosition))
                     {
                         // Нашли кем атаковать!
