@@ -6,6 +6,8 @@ public class EnableOnTimer : MonoBehaviour
 {
     public GameObject activateAfter;
     public float timeLeft = 5.0f;
+    public bool keyControlled = false;
+    public bool destroyThis = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +19,11 @@ public class EnableOnTimer : MonoBehaviour
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
+        if ((timeLeft <= 0) || 
+            ((keyControlled==true) && (Input.anyKeyDown)))
         {
             activateAfter.SetActive(true);
+            if (destroyThis) Destroy(this.gameObject);
             this.enabled = false;
 
         }

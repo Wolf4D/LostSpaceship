@@ -16,11 +16,8 @@ EditorBuildSettings:
     guid: fbdd65f25d5e2bc4cbad4127c35e24a2
   - enabled: 1
     path: Assets/2.unity
-    guid: f511e40f32a157c4a9ec7b16637bf182
-  - enabled: 1
-    path: Assets/3.unity
-    guid: 38bc561a99dec924b9fc38e75ed6a8cd
+    guid: 89220564be1600c4b9bd800636803587
   - enabled: 1
     path: Assets/Final.unity
-    guid: df644b9589c4fa24ab1b758ccfc95ea5
+    guid: f37eb4f7302d20e4782e5bc57ca641f6
   m_configObjects: {}
