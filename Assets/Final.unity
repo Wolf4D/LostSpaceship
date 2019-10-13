@@ -664,8 +664,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 14.419922, y: 25}
-  m_SizeDelta: {x: -325.08002, y: 521.16}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: -148.62, y: 567.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &805513169
 MonoBehaviour:
@@ -830,7 +830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1139904860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -852,8 +852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 14.419922, y: 20.1}
-  m_SizeDelta: {x: -325.08002, y: 549.6}
+  m_AnchoredPosition: {x: 0, y: 20.1}
+  m_SizeDelta: {x: -148.62, y: 566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139904861
 MonoBehaviour:
@@ -1906,7 +1906,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Today they're alive. \nAnd they will not give away. \nThanks to you.\n"
+  m_Text: "Today they're alive. \nThanks to you, player.\nThis fight'll continue in
+    a next game. "
 --- !u!222 &1925928422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2408,7 +2409,7 @@ MonoBehaviour:
     I had no time to implement), write me at: Wolf4D@list.ru</i>\n\n\n<b>I want to
     dedicate this game to:</b>\n- My mom and dad, who always cared and loved me -
     \nTamara Klenova and Leonid Yastrebov.\n\n- My beloved Margarita Malkowa. Yep
-    :)\n\n- All of my friends, who were ignored, whild I've been fighting TONS of
+    :)\n\n- All of my friends, who were ignored, while I've been fighting TONS of
     bugs here - Alexander Romanov, Ivan Golubev, Ivan Asmetkov and others. Sorry,
     guys! ;(\n\n- My cousin Olga Klenova. Be well soon!\n\n- Every person who kept
     me NOT GIVING AWAY this time :)"

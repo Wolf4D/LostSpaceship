@@ -1073,7 +1073,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.335
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5752,15 +5752,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 511178024, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3714926963087949516, guid: b033ad811535ba84db25d8b646245d8a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 41410318e7c5d68418e39eeb9a7dd4be, type: 2}
+    - target: {fileID: 511178024, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6016816475545155433, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
@@ -16834,6 +16834,11 @@ PrefabInstance:
       propertyPath: currentSide
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3714926963087949516, guid: b033ad811535ba84db25d8b646245d8a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1181bdeaa88ce124db97784a5961bb8f, type: 2}
     - target: {fileID: 517126152, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
       propertyPath: m_Color.r
       value: 0.8867924
@@ -16854,11 +16859,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3714926963087949516, guid: b033ad811535ba84db25d8b646245d8a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1181bdeaa88ce124db97784a5961bb8f, type: 2}
     m_RemovedComponents:
     - {fileID: 6016816475545155433, guid: b033ad811535ba84db25d8b646245d8a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b033ad811535ba84db25d8b646245d8a, type: 3}

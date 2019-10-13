@@ -749,6 +749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAfter: {fileID: 1392649234}
   timeLeft: 6.5
+  keyControlled: 0
+  destroyThis: 0
 --- !u!4 &111888277
 Transform:
   m_ObjectHideFlags: 0
@@ -4030,6 +4032,8 @@ MonoBehaviour:
   cameraBorder: 20.2
   cameraMinHeight: 148
   cameraMaxHeight: 320
+  separateAxes: 0
+  separateZSize: 0
   mapSize: 200
   disable: 0
 --- !u!114 &534669910
@@ -4074,7 +4078,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.335
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
