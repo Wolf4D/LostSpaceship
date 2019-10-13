@@ -28290,13 +28290,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
   side: 1
-  HP: 5
-  MaxHP: 5
+  HP: 4
+  MaxHP: 4
   speed: 4
   attack: 9
   attackCooldown: 0
   attackCooldownLeft: 0
-  range: 6
+  range: 7
   hasMoved: 0
   unitName: Cruiser
   abilityCooldownLeft: 0
